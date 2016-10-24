@@ -1,37 +1,22 @@
 package model;
 
 import lockAndBuffer.Buffer;
-import lockAndBuffer.Buffer.StoppException;
 
-public class Sub {
-	public static Sub create(Buffer<Integer> minuendBuffer, Buffer<Integer> subtrahendBuffer, Buffer<Integer> outputBuffer){
-		return new Sub(minuendBuffer, subtrahendBuffer, outputBuffer);
-	}
-	
-	private final Buffer<Integer> minuendBuffer;
-	private final Buffer<Integer> subtrahendBuffer;
-	private final Buffer<Integer> outputBuffer;
+public class Sub extends Calculator {
 
-	private Sub(Buffer<Integer> minuendBuffer, Buffer<Integer> subtrahendBuffer, Buffer<Integer> outputBuffer){
-		this.minuendBuffer = minuendBuffer;
-		this.subtrahendBuffer = subtrahendBuffer;
-		this.outputBuffer = outputBuffer;
+	public static Sub create(Buffer<Integer> summand1Buffer, Buffer<Integer> summand2Buffer,
+			Buffer<Integer> outputBuffer) {
+		return new Sub(summand1Buffer, summand2Buffer, outputBuffer);
 	}
-	
-	public void sub() {
-		new Thread(new Runnable() {	
-			@Override
-			public void run() {
-				boolean running = true;
-				while (running) {
-					try {
-						Sub.this.outputBuffer.put(Sub.this.minuendBuffer.get()-Sub.this.subtrahendBuffer.get());
-					} catch (StoppException e) {
-						running = false;
-					}	
-				}
-			}
-		}).start();
+
+	private Sub(Buffer<Integer> buffer1, Buffer<Integer> buffer2, Buffer<Integer> outputBuffer) {
+		super(buffer1, buffer2, outputBuffer);
+		this.description = "Sub";
+	}
+
+	@Override
+	public int compute(int int1, int int2) {
+		return int1 - int2;
 	}
 
 }

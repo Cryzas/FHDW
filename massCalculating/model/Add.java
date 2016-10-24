@@ -1,37 +1,22 @@
 package model;
 
 import lockAndBuffer.Buffer;
-import lockAndBuffer.Buffer.StoppException;
 
-public class Add {
+public class Add extends Calculator{
 	
-	public static Add create(Buffer<Integer> summandBuffer1, Buffer<Integer> summandBuffer2, Buffer<Integer> outputBuffer){
-		return new Add(summandBuffer1, summandBuffer2, outputBuffer);
+	public static Add create(Buffer<Integer> summand1Buffer, Buffer<Integer> summand2Buffer,
+			Buffer<Integer> outputBuffer) {
+		return new Add(summand1Buffer, summand2Buffer, outputBuffer);
 	}
-	
-	private final Buffer<Integer> summandBuffer1;
-	private final Buffer<Integer> summandBuffer2;
-	private final Buffer<Integer> outputBuffer;
 
-	private Add(Buffer<Integer> summandBuffer1, Buffer<Integer> summandBuffer2, Buffer<Integer> outputBuffer){
-		this.summandBuffer1 = summandBuffer1;
-		this.summandBuffer2 = summandBuffer2;
-		this.outputBuffer = outputBuffer;
+	private Add(Buffer<Integer> buffer1, Buffer<Integer> buffer2, Buffer<Integer> outputBuffer) {
+		super(buffer1, buffer2, outputBuffer);
+		this.description = "Add";
+	}
+
+	@Override
+	public int compute(int int1, int int2) {
+		return int1 + int2;
 	}
 	
-	public void add() {
-		new Thread(new Runnable() {	
-			@Override
-			public void run() {
-				boolean running = true;
-				while (running) {
-					try {
-						Add.this.outputBuffer.put(Add.this.summandBuffer1.get()+Add.this.summandBuffer2.get());
-					} catch (StoppException e) {
-						running = false;
-					}	
-				}
-			}
-		}).start();
-	}
 }
