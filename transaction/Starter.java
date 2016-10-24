@@ -6,8 +6,14 @@ import javax.swing.UIManager;
 import view.ViewStarter;
 
 /*
+ * DUUUUMMMMM!!! Das ist der test
+ */
+
+
+/*
  * DU BIST COOOOOLLL!ssss
  */
+
 
 public class Starter {
 
