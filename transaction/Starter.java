@@ -5,7 +5,7 @@ import javax.swing.UIManager;
 
 import view.ViewStarter;
 /*
- * DUUUUMMMMM!!!
+ * DUUUUMMMMM!!! Das ist der test
  */
 
 
