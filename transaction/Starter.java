@@ -4,7 +4,9 @@ import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
 
 import view.ViewStarter;
-
+/*
+ * DUUUUMMMMM!!!
+ */
 
 
 public class Starter {
