@@ -125,7 +125,7 @@ public class TransactionTest {
 	}
 
 	@Test
-	public void testMultipleTransfers1() {
+	public void testUnderLimit() {
 		try {
 			transfer6.book();
 			transfer6.book();
