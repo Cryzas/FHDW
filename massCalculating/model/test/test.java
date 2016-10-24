@@ -7,6 +7,7 @@ import org.junit.Test;
 import lockAndBuffer.Buffer;
 import lockAndBuffer.Buffer.StoppException;
 import model.Add;
+import model.Constant;
 import model.Div;
 import model.Mul;
 import model.Sub;
@@ -166,6 +167,19 @@ public class test {
 		second.put(3);
 		third.put(4);
 		assertEquals(new Integer(2), lastoutput.get());
+	}
+	
+	@Test
+	public void testConstant() throws StoppException {
+		Buffer<Integer> first = new Buffer<Integer>(10);
+		Constant second = new Constant(3);
+		Buffer<Integer> output = new Buffer<Integer>(10);
+		Mul mul = Mul.create(first, second, output);
+		mul.start();
+		first.put(2);
+		assertEquals(new Integer(6), output.get());
+		first.put(3);
+		assertEquals(new Integer(9), output.get());
 	}
 
 }

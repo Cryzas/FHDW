@@ -4,9 +4,9 @@ import lockAndBuffer.Buffer;
 
 public class Mul extends Calculator {
 
-	public static Mul create(Buffer<Integer> summand1Buffer, Buffer<Integer> summand2Buffer,
+	public static Mul create(Buffer<Integer> factor1Buffer, Buffer<Integer> factor2Buffer,
 			Buffer<Integer> outputBuffer) {
-		return new Mul(summand1Buffer, summand2Buffer, outputBuffer);
+		return new Mul(factor1Buffer, factor2Buffer, outputBuffer);
 	}
 
 	private Mul(Buffer<Integer> buffer1, Buffer<Integer> buffer2, Buffer<Integer> outputBuffer) {

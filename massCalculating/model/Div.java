@@ -4,9 +4,9 @@ import lockAndBuffer.Buffer;
 
 public class Div extends Calculator {
 
-	public static Div create(Buffer<Integer> summand1Buffer, Buffer<Integer> summand2Buffer,
+	public static Div create(Buffer<Integer> dividendBuffer, Buffer<Integer> divisorBuffer,
 			Buffer<Integer> outputBuffer) {
-		return new Div(summand1Buffer, summand2Buffer, outputBuffer);
+		return new Div(dividendBuffer, divisorBuffer, outputBuffer);
 	}
 
 	private Div(Buffer<Integer> buffer1, Buffer<Integer> buffer2, Buffer<Integer> outputBuffer) {

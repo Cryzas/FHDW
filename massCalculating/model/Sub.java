@@ -4,9 +4,9 @@ import lockAndBuffer.Buffer;
 
 public class Sub extends Calculator {
 
-	public static Sub create(Buffer<Integer> summand1Buffer, Buffer<Integer> summand2Buffer,
+	public static Sub create(Buffer<Integer> subtrahendBuffer, Buffer<Integer> minuendBuffer,
 			Buffer<Integer> outputBuffer) {
-		return new Sub(summand1Buffer, summand2Buffer, outputBuffer);
+		return new Sub(subtrahendBuffer, minuendBuffer, outputBuffer);
 	}
 
 	private Sub(Buffer<Integer> buffer1, Buffer<Integer> buffer2, Buffer<Integer> outputBuffer) {
