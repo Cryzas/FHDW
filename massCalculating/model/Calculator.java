@@ -6,11 +6,11 @@ import lockAndBuffer.Buffer.StoppException;
 public abstract class Calculator {
 
 	protected String description;
-	private final Buffer<Integer> buffer1;
-	private final Buffer<Integer> buffer2;
+	private final CalcValue<Integer> buffer1;
+	private final CalcValue<Integer> buffer2;
 	private final Buffer<Integer> outputBuffer;
 
-	protected Calculator(Buffer<Integer> buffer1, Buffer<Integer> buffer2, Buffer<Integer> outputBuffer) {
+	protected Calculator(CalcValue<Integer> buffer1, CalcValue<Integer> buffer2, Buffer<Integer> outputBuffer) {
 		this.buffer1 = buffer1;
 		this.buffer2 = buffer2;
 		this.outputBuffer = outputBuffer;

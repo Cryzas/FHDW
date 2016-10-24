@@ -172,7 +172,7 @@ public class test {
 	@Test
 	public void testConstant() throws StoppException {
 		Buffer<Integer> first = new Buffer<Integer>(10);
-		Constant second = new Constant(3);
+		Constant<Integer> second = new Constant<Integer>(3);
 		Buffer<Integer> output = new Buffer<Integer>(10);
 		Mul mul = Mul.create(first, second, output);
 		mul.start();

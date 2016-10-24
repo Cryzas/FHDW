@@ -4,12 +4,12 @@ import lockAndBuffer.Buffer;
 
 public class Add extends Calculator{
 	
-	public static Add create(Buffer<Integer> summand1Buffer, Buffer<Integer> summand2Buffer,
+	public static Add create(CalcValue<Integer> summand1Buffer, CalcValue<Integer> summand2Buffer,
 			Buffer<Integer> outputBuffer) {
 		return new Add(summand1Buffer, summand2Buffer, outputBuffer);
 	}
 
-	private Add(Buffer<Integer> buffer1, Buffer<Integer> buffer2, Buffer<Integer> outputBuffer) {
+	private Add(CalcValue<Integer> buffer1, CalcValue<Integer> buffer2, Buffer<Integer> outputBuffer) {
 		super(buffer1, buffer2, outputBuffer);
 		this.description = "Add";
 	}

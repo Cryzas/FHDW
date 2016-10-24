@@ -1,17 +1,14 @@
 package model;
 
-import lockAndBuffer.Buffer;
+public class Constant<E> implements CalcValue<E>{
 
-public class Constant extends Buffer<Integer>{
-
-	Integer value;
+	E value;
 	
-	public Constant(int value) {
-		super(1);
+	public Constant(E value) {
 		this.value = value;
 	}
 	
-	public Integer get(){
+	public E get(){
 		return value;		
 	}
 
