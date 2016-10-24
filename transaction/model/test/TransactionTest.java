@@ -124,12 +124,26 @@ public class TransactionTest {
 		assertEquals(1000, cook.getBalance());
 	}
 
-	//Miaauuuuu
 	@Test
 	public void testUnderLimit() {
 		try {
+			assertFalse(transfer6.isTried());
+			assertEquals(0, transfer6.getTriedCount());
 			transfer6.book();
+			assertTrue(transfer6.isTried());
+			assertEquals(1, transfer6.getTriedCount());
 			transfer6.book();
+			assertTrue(transfer6.isTried());
+			assertEquals(2, transfer6.getTriedCount());
+			transfer6.book();
+			assertTrue(transfer6.isTried());
+			assertEquals(3, transfer6.getTriedCount());
+			transfer6.book();
+			assertTrue(transfer6.isTried());
+			assertEquals(4, transfer6.getTriedCount());
+			transfer6.book();
+			assertTrue(transfer6.isTried());
+			assertEquals(5, transfer6.getTriedCount());
 		} catch (UnderLimitException e) {
 			System.out.println("true");
 		}
