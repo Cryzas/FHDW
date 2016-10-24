@@ -4,10 +4,17 @@ import javax.swing.ToolTipManager;
 import javax.swing.UIManager;
 
 import view.ViewStarter;
+<<<<<<< HEAD
 /*
  * DUUUUMMMMM!!! Das ist der test
  */
 
+=======
+
+/*
+ * DU BIST COOOOOLLL!ssss
+ */
+>>>>>>> refs/remotes/origin/master
 
 public class Starter {
 
