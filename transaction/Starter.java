@@ -5,7 +5,9 @@ import javax.swing.UIManager;
 
 import view.ViewStarter;
 
-
+/*
+ * DU BIST COOOOOLLL!ssss
+ */
 
 public class Starter {
 
