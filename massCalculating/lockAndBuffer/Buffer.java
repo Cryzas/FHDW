@@ -2,9 +2,9 @@
 
 package lockAndBuffer;
 
-import model.CalcValue;
+import model.BufferOrConstant;
 
-public class Buffer<E> implements CalcValue<E> {
+public class Buffer<E> implements BufferOrConstant<E> {
 	public static <E> Buffer<E> create(int capacity) {
 		return new Buffer<E> (capacity);
 	}

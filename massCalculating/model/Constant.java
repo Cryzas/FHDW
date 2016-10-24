@@ -1,6 +1,6 @@
 package model;
 
-public class Constant<E> implements CalcValue<E>{
+public class Constant<E> implements BufferOrConstant<E>{
 
 	E value;
 	
