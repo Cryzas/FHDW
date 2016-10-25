@@ -1,44 +1,51 @@
 
-
 package lockAndBuffer;
 
 import model.BufferOrConstant;
 
 public class Buffer<E> implements BufferOrConstant<E> {
 	public static <E> Buffer<E> create(int capacity) {
-		return new Buffer<E> (capacity);
+		return new Buffer<E>(capacity);
 	}
+
 	@SuppressWarnings("serial")
-	public static class StoppException extends Exception {}
+	public static class StoppException extends Exception {
+	}
 
 	private abstract class BufferEntry<T> {
 		abstract T getWrapped() throws StoppException;
 	}
-	private class Stopp<T> extends BufferEntry<T>{
-		Stopp(){}
+
+	private class Stopp<T> extends BufferEntry<T> {
+		Stopp() {
+		}
+
 		@Override
 		T getWrapped() throws StoppException {
 			throw new StoppException();
 		}
 	}
+
 	private class Wrapped<T> extends BufferEntry<T> {
 		final private T wrapped;
-		Wrapped(T toBeWrapped){
+
+		Wrapped(T toBeWrapped) {
 			this.wrapped = toBeWrapped;
 		}
+
 		@Override
 		public T getWrapped() {
 			return this.wrapped;
 		}
 	}
-	
-	public Buffer(int capacity){
+
+	public Buffer(int capacity) {
 		this.internalCapacity = (capacity <= 0 ? 1 : capacity) + 1;
 		this.myBuffer = new Object[this.internalCapacity];
 		this.first = 0;
 		this.behindLast = 0;
 	}
-	
+
 	private Lock mutex = new Lock(false);
 	private Lock reading = new Lock(true);
 	private int waitingForNotEmpty = 0;
@@ -51,10 +58,11 @@ public class Buffer<E> implements BufferOrConstant<E> {
 	private int internalCapacity;
 	private Lock writingUnlockFinished = new Lock(true);
 	private Lock readingUnlockFinished = new Lock(true);
-	
+
 	public void put(E value) {
 		this.put(new Wrapped<E>(value));
 	}
+
 	private void put(BufferEntry<E> value) {
 		mutex.lock();
 		while (this.isFull()) {
@@ -73,9 +81,10 @@ public class Buffer<E> implements BufferOrConstant<E> {
 		}
 		mutex.unlock();
 	}
+
 	public E get() throws StoppException {
 		mutex.lock();
-		while (this.isEmpty()){
+		while (this.isEmpty()) {
 			this.waitingForNotEmpty++;
 			mutex.unlock();
 			reading.lock();
@@ -86,7 +95,7 @@ public class Buffer<E> implements BufferOrConstant<E> {
 		try {
 			result = this.getNextEntry().getWrapped();
 		} finally {
-			if (this.waitingForNotFull > 0){
+			if (this.waitingForNotFull > 0) {
 				this.waitingForNotFull--;
 				writing.unlock();
 				writingUnlockFinished.lock();
@@ -95,36 +104,36 @@ public class Buffer<E> implements BufferOrConstant<E> {
 		}
 		return result;
 	}
+
 	private void addNextEntry(Buffer<E>.BufferEntry<E> wrapped) {
 		this.myBuffer[this.behindLast] = wrapped;
 		this.behindLast = (this.behindLast + 1) % this.internalCapacity;
 	}
+
 	private Buffer<E>.BufferEntry<E> getNextEntry() {
 		@SuppressWarnings("unchecked")
 		BufferEntry<E> result = (Buffer<E>.BufferEntry<E>) this.myBuffer[this.first];
 		this.first = (this.first + 1) % this.internalCapacity;
 		return result;
 	}
-	public void stopp(){
+
+	public void stopp() {
 		this.put(new Stopp<E>());
 	}
-	private boolean isEmpty(){
+
+	private boolean isEmpty() {
 		return this.first == this.behindLast;
 	}
-	private boolean isFull(){
+
+	private boolean isFull() {
 		return (this.behindLast + 1) % this.internalCapacity == this.first;
 	}
-	public int size(){
+
+	public int size() {
 		this.mutex.lock();
-		int result = this.first <= this.behindLast 
-						? this.behindLast - this.first
-						: this.behindLast + (this.internalCapacity - this.first)				;
+		int result = this.first <= this.behindLast ? this.behindLast - this.first
+				: this.behindLast + (this.internalCapacity - this.first);
 		this.mutex.unlock();
 		return result;
 	}
 }
-
-
-
-
-

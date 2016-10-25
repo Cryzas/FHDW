@@ -10,7 +10,8 @@ public abstract class Calculator {
 	private final BufferOrConstant<Integer> buffer2;
 	private final Buffer<Integer> outputBuffer;
 
-	protected Calculator(BufferOrConstant<Integer> buffer1, BufferOrConstant<Integer> buffer2, Buffer<Integer> outputBuffer) {
+	protected Calculator(BufferOrConstant<Integer> buffer1, BufferOrConstant<Integer> buffer2,
+			Buffer<Integer> outputBuffer) {
 		this.buffer1 = buffer1;
 		this.buffer2 = buffer2;
 		this.outputBuffer = outputBuffer;
@@ -23,7 +24,8 @@ public abstract class Calculator {
 				boolean running = true;
 				while (running) {
 					try {
-						Calculator.this.outputBuffer.put(compute(Calculator.this.buffer1.get(), Calculator.this.buffer2.get()));
+						Calculator.this.outputBuffer
+								.put(compute(Calculator.this.buffer1.get(), Calculator.this.buffer2.get()));
 					} catch (StoppException e) {
 						running = false;
 						outputBuffer.stopp();
