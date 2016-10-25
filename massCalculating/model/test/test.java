@@ -33,8 +33,8 @@ public class test {
 		} catch (final StoppException e) {
 			// OK
 		}
-    }
-	
+	}
+
 	@Test
 	public void testAddFalse() throws StoppException {
 		Buffer<Integer> first = new Buffer<Integer>(10);
@@ -48,7 +48,7 @@ public class test {
 		second.stopp();
 		assertNotEquals(new Integer(4), output.get());
 	}
-	
+
 	@Test
 	public void testSub() throws StoppException {
 		Buffer<Integer> first = new Buffer<Integer>(10);
@@ -62,7 +62,7 @@ public class test {
 		second.stopp();
 		assertEquals(new Integer(-2), output.get());
 	}
-	
+
 	@Test
 	public void testSubFalse() throws StoppException {
 		Buffer<Integer> first = new Buffer<Integer>(10);
@@ -76,7 +76,7 @@ public class test {
 		second.stopp();
 		assertNotEquals(new Integer(4), output.get());
 	}
-	
+
 	@Test
 	public void testMul() throws StoppException {
 		Buffer<Integer> first = new Buffer<Integer>(10);
@@ -90,7 +90,7 @@ public class test {
 		second.stopp();
 		assertEquals(new Integer(6), output.get());
 	}
-	
+
 	@Test
 	public void testMulFalse() throws StoppException {
 		Buffer<Integer> first = new Buffer<Integer>(10);
@@ -104,9 +104,7 @@ public class test {
 		second.stopp();
 		assertNotEquals(new Integer(4), output.get());
 	}
-	
 
-	
 	@Test
 	public void testDiv() throws StoppException {
 		Buffer<Integer> first = new Buffer<Integer>(10);
@@ -120,7 +118,7 @@ public class test {
 		second.stopp();
 		assertEquals(new Integer(2), output.get());
 	}
-	
+
 	@Test
 	public void testDivFalse() throws StoppException {
 		Buffer<Integer> first = new Buffer<Integer>(10);
@@ -134,7 +132,7 @@ public class test {
 		second.stopp();
 		assertNotEquals(new Integer(4), output.get());
 	}
-	
+
 	@Test
 	public void testDivZero() throws StoppException {
 		Buffer<Integer> first = new Buffer<Integer>(10);
@@ -143,15 +141,15 @@ public class test {
 		Div div = Div.create(first, second, output);
 		div.start();
 		try {
-			
-		first.put(6);
-		second.put(0);
-		fail();
+
+			first.put(6);
+			second.put(0);
+			fail();
 		} catch (Error e) {
-			
+
 		}
 	}
-	
+
 	@Test
 	public void testChain() throws StoppException {
 		Buffer<Integer> first = new Buffer<Integer>(10);
@@ -168,7 +166,7 @@ public class test {
 		third.put(4);
 		assertEquals(new Integer(2), lastoutput.get());
 	}
-	
+
 	@Test
 	public void testConstant() throws StoppException {
 		Buffer<Integer> first = new Buffer<Integer>(10);
