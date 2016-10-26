@@ -4,12 +4,12 @@ import lockAndBuffer.Buffer;
 
 public class Mul extends Calculator {
 
-	public static Mul create(BufferOrConstant<Integer> factor1Buffer, BufferOrConstant<Integer> factor2Buffer,
+	public static Mul create(Container<Integer> factor1Buffer, Container<Integer> factor2Buffer,
 			Buffer<Integer> outputBuffer) {
 		return new Mul(factor1Buffer, factor2Buffer, outputBuffer);
 	}
 
-	private Mul(BufferOrConstant<Integer> buffer1, BufferOrConstant<Integer> buffer2, Buffer<Integer> outputBuffer) {
+	private Mul(Container<Integer> buffer1, Container<Integer> buffer2, Buffer<Integer> outputBuffer) {
 		super(buffer1, buffer2, outputBuffer);
 		this.description = "Mul";
 	}

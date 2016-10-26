@@ -4,12 +4,12 @@ import lockAndBuffer.Buffer;
 
 public class Sub extends Calculator {
 
-	public static Sub create(BufferOrConstant<Integer> subtrahendBuffer, BufferOrConstant<Integer> minuendBuffer,
+	public static Sub create(Container<Integer> subtrahendBuffer, Container<Integer> minuendBuffer,
 			Buffer<Integer> outputBuffer) {
 		return new Sub(subtrahendBuffer, minuendBuffer, outputBuffer);
 	}
 
-	private Sub(BufferOrConstant<Integer> buffer1, BufferOrConstant<Integer> buffer2, Buffer<Integer> outputBuffer) {
+	private Sub(Container<Integer> buffer1, Container<Integer> buffer2, Buffer<Integer> outputBuffer) {
 		super(buffer1, buffer2, outputBuffer);
 		this.description = "Sub";
 	}

@@ -1,6 +1,6 @@
 package model;
 
-public class Constant<E> implements BufferOrConstant<E> {
+public class Constant<E> implements Container<E> {
 
 	E value;
 

@@ -2,7 +2,7 @@ package model;
 
 import lockAndBuffer.Buffer.StoppException;
 
-public interface BufferOrConstant<E> {
+public interface Container<E> {
 
 	public E get() throws StoppException;
 

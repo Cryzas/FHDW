@@ -4,12 +4,12 @@ import lockAndBuffer.Buffer;
 
 public class Div extends Calculator {
 
-	public static Div create(BufferOrConstant<Integer> dividendBuffer, BufferOrConstant<Integer> divisorBuffer,
+	public static Div create(Container<Integer> dividendBuffer, Container<Integer> divisorBuffer,
 			Buffer<Integer> outputBuffer) {
 		return new Div(dividendBuffer, divisorBuffer, outputBuffer);
 	}
 
-	private Div(BufferOrConstant<Integer> buffer1, BufferOrConstant<Integer> buffer2, Buffer<Integer> outputBuffer) {
+	private Div(Container<Integer> buffer1, Container<Integer> buffer2, Buffer<Integer> outputBuffer) {
 		super(buffer1, buffer2, outputBuffer);
 		this.description = "Div";
 	}
