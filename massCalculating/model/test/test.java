@@ -135,14 +135,14 @@ public class test {
 
 	//@Test
 	public void testDivZero() throws StoppException {
+		try {
 		Buffer<Integer> first = new Buffer<Integer>(10);
 		Buffer<Integer> second = new Buffer<Integer>(10);
 		Buffer<Integer> output = new Buffer<Integer>(10);
 		Div div = Div.create(first, second, output);
-		try {
-			div.start();		
-			first.put(6);
-			second.put(0);
+		div.start();		
+		first.put(6);
+		second.put(0);
 		} catch (ArithmeticException e) {
 
 		}
