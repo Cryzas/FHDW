@@ -119,7 +119,6 @@ public class Buffer<E> implements Container<E> {
 
 	public void stopp() {
 		this.put(new Stopp<E>());
-		this.notify();
 	}
 
 	private boolean isEmpty() {
