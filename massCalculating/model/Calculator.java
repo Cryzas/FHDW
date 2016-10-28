@@ -1,6 +1,7 @@
 package model;
 
 import lockAndBuffer.Buffer;
+import lockAndBuffer.Container;
 import lockAndBuffer.Buffer.ErrorInCalcException;
 import lockAndBuffer.Buffer.StoppException;
 

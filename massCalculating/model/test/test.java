@@ -5,10 +5,10 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import lockAndBuffer.Buffer;
+import lockAndBuffer.Constant;
 import lockAndBuffer.Buffer.ErrorInCalcException;
 import lockAndBuffer.Buffer.StoppException;
 import model.Add;
-import model.Constant;
 import model.Div;
 import model.Mul;
 import model.Sub;

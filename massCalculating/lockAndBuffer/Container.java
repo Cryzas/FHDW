@@ -1,4 +1,4 @@
-package model;
+package lockAndBuffer;
 
 import lockAndBuffer.Buffer.ErrorInCalcException;
 import lockAndBuffer.Buffer.StoppException;

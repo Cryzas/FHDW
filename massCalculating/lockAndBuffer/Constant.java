@@ -1,4 +1,4 @@
-package model;
+package lockAndBuffer;
 
 public class Constant<E> implements Container<E> {
 

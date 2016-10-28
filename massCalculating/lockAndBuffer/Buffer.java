@@ -1,8 +1,6 @@
 
 package lockAndBuffer;
 
-import model.Container;
-
 public class Buffer<E> implements Container<E> {
 	public static <E> Buffer<E> create(int capacity) {
 		return new Buffer<E>(capacity);
