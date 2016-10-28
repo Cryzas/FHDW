@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import lockAndBuffer.Buffer;
+import lockAndBuffer.Buffer.ErrorInCalcException;
 import lockAndBuffer.Buffer.StoppException;
 import model.Add;
 import model.Constant;
@@ -15,7 +16,7 @@ import model.Sub;
 public class test {
 
 	@Test
-	public void testAdd() throws StoppException {
+	public void testAdd() throws StoppException, ErrorInCalcException {
 		Buffer<Integer> first = new Buffer<Integer>(10);
 		Buffer<Integer> second = new Buffer<Integer>(10);
 		Buffer<Integer> output = new Buffer<Integer>(10);
@@ -36,7 +37,7 @@ public class test {
 	}
 
 	@Test
-	public void testAddFalse() throws StoppException {
+	public void testAddFalse() throws StoppException, ErrorInCalcException {
 		Buffer<Integer> first = new Buffer<Integer>(10);
 		Buffer<Integer> second = new Buffer<Integer>(10);
 		Buffer<Integer> output = new Buffer<Integer>(10);
@@ -50,7 +51,7 @@ public class test {
 	}
 
 	@Test
-	public void testSub() throws StoppException {
+	public void testSub() throws StoppException, ErrorInCalcException {
 		Buffer<Integer> first = new Buffer<Integer>(10);
 		Buffer<Integer> second = new Buffer<Integer>(10);
 		Buffer<Integer> output = new Buffer<Integer>(10);
@@ -64,7 +65,7 @@ public class test {
 	}
 
 	@Test
-	public void testSubFalse() throws StoppException {
+	public void testSubFalse() throws StoppException, ErrorInCalcException {
 		Buffer<Integer> first = new Buffer<Integer>(10);
 		Buffer<Integer> second = new Buffer<Integer>(10);
 		Buffer<Integer> output = new Buffer<Integer>(10);
@@ -78,7 +79,7 @@ public class test {
 	}
 
 	@Test
-	public void testMul() throws StoppException {
+	public void testMul() throws StoppException, ErrorInCalcException {
 		Buffer<Integer> first = new Buffer<Integer>(10);
 		Buffer<Integer> second = new Buffer<Integer>(10);
 		Buffer<Integer> output = new Buffer<Integer>(10);
@@ -92,7 +93,7 @@ public class test {
 	}
 
 	@Test
-	public void testMulFalse() throws StoppException {
+	public void testMulFalse() throws StoppException, ErrorInCalcException {
 		Buffer<Integer> first = new Buffer<Integer>(10);
 		Buffer<Integer> second = new Buffer<Integer>(10);
 		Buffer<Integer> output = new Buffer<Integer>(10);
@@ -106,7 +107,7 @@ public class test {
 	}
 
 	@Test
-	public void testDiv() throws StoppException {
+	public void testDiv() throws StoppException, ErrorInCalcException {
 		Buffer<Integer> first = new Buffer<Integer>(10);
 		Buffer<Integer> second = new Buffer<Integer>(10);
 		Buffer<Integer> output = new Buffer<Integer>(10);
@@ -120,7 +121,7 @@ public class test {
 	}
 
 	@Test
-	public void testDivFalse() throws StoppException {
+	public void testDivFalse() throws StoppException, ErrorInCalcException {
 		Buffer<Integer> first = new Buffer<Integer>(10);
 		Buffer<Integer> second = new Buffer<Integer>(10);
 		Buffer<Integer> output = new Buffer<Integer>(10);
@@ -133,9 +134,8 @@ public class test {
 		assertNotEquals(new Integer(4), output.get());
 	}
 
-	//@Test
-	public void testDivZero() throws StoppException {
-		try {
+	@Test
+	public void testDivZero() throws StoppException, ErrorInCalcException {
 		Buffer<Integer> first = new Buffer<Integer>(10);
 		Buffer<Integer> second = new Buffer<Integer>(10);
 		Buffer<Integer> output = new Buffer<Integer>(10);
@@ -143,13 +143,16 @@ public class test {
 		div.start();		
 		first.put(6);
 		second.put(0);
-		} catch (ArithmeticException e) {
-
+		try{
+		output.get();
+		fail("Exception Expected");
+		} catch (ErrorInCalcException e) {
+			
 		}
 	}
 
 	@Test
-	public void testChain() throws StoppException {
+	public void testChain() throws StoppException, ErrorInCalcException {
 		Buffer<Integer> first = new Buffer<Integer>(10);
 		Buffer<Integer> second = new Buffer<Integer>(10);
 		Buffer<Integer> output = new Buffer<Integer>(10);
@@ -166,7 +169,7 @@ public class test {
 	}
 
 	@Test
-	public void testConstant() throws StoppException {
+	public void testConstant() throws StoppException, ErrorInCalcException {
 		Buffer<Integer> first = new Buffer<Integer>(10);
 		Constant<Integer> second = new Constant<Integer>(3);
 		Buffer<Integer> output = new Buffer<Integer>(10);

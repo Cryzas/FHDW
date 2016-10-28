@@ -1,6 +1,7 @@
 package model;
 
 import lockAndBuffer.Buffer;
+import lockAndBuffer.Buffer.ErrorInCalcException;
 import lockAndBuffer.Buffer.StoppException;
 
 public abstract class Calculator {
@@ -29,11 +30,14 @@ public abstract class Calculator {
 					} catch (StoppException e) {
 						running = false;
 						outputBuffer.stopp();
-					}
+					} catch (ErrorInCalcException e) {
+						running = false;
+						outputBuffer.putCalcErrorException();
+					} 
 				}
 			}
 		}, description).start();
 	}
 
-	public abstract int compute(int int1, int int2);
+	public abstract int compute(int int1, int int2) throws ErrorInCalcException;
 }

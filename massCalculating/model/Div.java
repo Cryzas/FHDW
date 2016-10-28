@@ -1,6 +1,7 @@
 package model;
 
 import lockAndBuffer.Buffer;
+import lockAndBuffer.Buffer.ErrorInCalcException;
 
 public class Div extends Calculator {
 
@@ -15,8 +16,14 @@ public class Div extends Calculator {
 	}
 
 	@Override
-	public int compute(int int1, int int2) {
-		return int1 / int2;
+	public int compute (int int1, int int2) throws ErrorInCalcException {
+		int erg;
+		try{
+			erg = int1/int2;
+		} catch(ArithmeticException e){
+			throw new ErrorInCalcException();
+		}
+		return erg;
 	}
 
 }
