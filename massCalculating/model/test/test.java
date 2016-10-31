@@ -9,6 +9,7 @@ import lockAndBuffer.Constant;
 import lockAndBuffer.Buffer.ErrorInCalcException;
 import lockAndBuffer.Buffer.StoppException;
 import model.Add;
+import model.Cloner;
 import model.Div;
 import model.Mul;
 import model.Sub;
@@ -146,6 +147,51 @@ public class test {
 		assertEquals(new Integer(6), output.get());
 		first.put(3);
 		assertEquals(new Integer(9), output.get());
+	}
+	
+	@Test
+	public void testReUse() throws StoppException, ErrorInCalcException {
+		Buffer<Integer> x = new Buffer<Integer>(10);
+		Buffer<Integer> y = new Buffer<Integer>(10);
+		Buffer<Integer> z = new Buffer<Integer>(10);
+		Buffer<Integer> output2 = new Buffer<Integer>(10);
+		Buffer<Integer> erg = new Buffer<Integer>(10);
+		Constant<Integer> five = new Constant<Integer>(5);
+		Cloner<Integer> cloner = new Cloner<Integer>(z,2);
+		Mul mul1 = Mul.create(x, y, z);
+		Add add1 = Add.create(cloner.getList().get(0), five, output2);
+		Mul mul2 = Mul.create(cloner.getList().get(1), output2, erg);
+		cloner.duplicate();
+		mul1.start();
+		add1.start();
+		mul2.start();
+		x.put(2);
+		y.put(3);
+		assertEquals(new Integer(66), erg.get());
+	}
+	
+	@Test
+	public void testReUse3() throws StoppException, ErrorInCalcException {
+		Buffer<Integer> x = new Buffer<Integer>(10);
+		Buffer<Integer> y = new Buffer<Integer>(10);
+		Buffer<Integer> z = new Buffer<Integer>(10);
+		Buffer<Integer> output2 = new Buffer<Integer>(10);
+		Buffer<Integer> erg = new Buffer<Integer>(10);
+		Buffer<Integer> erg2 = new Buffer<Integer>(10);
+		Constant<Integer> five = new Constant<Integer>(5);
+		Cloner<Integer> cloner = new Cloner<Integer>(z,3);
+		Mul mul1 = Mul.create(x, y, z);
+		Add add1 = Add.create(cloner.getList().get(0), five, output2);
+		Mul mul2 = Mul.create(cloner.getList().get(1), output2, erg);
+		Sub sub1 = Sub.create(erg, cloner.getList().get(2), erg2);
+		cloner.duplicate();
+		mul1.start();
+		add1.start();
+		mul2.start();
+		sub1.start();
+		x.put(2);
+		y.put(3);
+		assertEquals(new Integer(60), erg2.get());
 	}
 
 }
