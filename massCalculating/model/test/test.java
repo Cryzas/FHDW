@@ -161,7 +161,7 @@ public class test {
 		Mul mul1 = Mul.create(x, y, z);
 		Add add1 = Add.create(cloner.getList().get(0), five, output2);
 		Mul mul2 = Mul.create(cloner.getList().get(1), output2, erg);
-		cloner.duplicate();
+		cloner.start();
 		mul1.start();
 		add1.start();
 		mul2.start();
@@ -184,7 +184,7 @@ public class test {
 		Add add1 = Add.create(cloner.getList().get(0), five, output2);
 		Mul mul2 = Mul.create(cloner.getList().get(1), output2, erg);
 		Sub sub1 = Sub.create(erg, cloner.getList().get(2), erg2);
-		cloner.duplicate();
+		cloner.start();
 		mul1.start();
 		add1.start();
 		mul2.start();

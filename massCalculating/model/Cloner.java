@@ -18,7 +18,7 @@ public class Cloner<E> {
 		}
 	}
 
-	public void duplicate() throws StoppException, ErrorInCalcException {
+	public void start() throws StoppException, ErrorInCalcException {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
