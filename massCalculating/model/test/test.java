@@ -14,12 +14,17 @@ import model.Mul;
 import model.Sub;
 
 public class test {
+	
+	Buffer<Integer> first = new Buffer<Integer>(10);
+	Buffer<Integer> second = new Buffer<Integer>(10);
+	Buffer<Integer> output = new Buffer<Integer>(10);
+		
 
 	@Test
 	public void testAdd() throws StoppException, ErrorInCalcException {
-		Buffer<Integer> first = new Buffer<Integer>(10);
-		Buffer<Integer> second = new Buffer<Integer>(10);
-		Buffer<Integer> output = new Buffer<Integer>(10);
+		first = new Buffer<Integer>(10);
+		second = new Buffer<Integer>(10);
+		output = new Buffer<Integer>(10);
 		Add add = Add.create(first, second, output);
 		add.start();
 		first.put(1);
@@ -38,9 +43,9 @@ public class test {
 
 	@Test
 	public void testAddFalse() throws StoppException, ErrorInCalcException {
-		Buffer<Integer> first = new Buffer<Integer>(10);
-		Buffer<Integer> second = new Buffer<Integer>(10);
-		Buffer<Integer> output = new Buffer<Integer>(10);
+		first = new Buffer<Integer>(10);
+		second = new Buffer<Integer>(10);
+		output = new Buffer<Integer>(10);
 		Add add = Add.create(first, second, output);
 		add.start();
 		first.put(1);
@@ -52,9 +57,9 @@ public class test {
 
 	@Test
 	public void testSub() throws StoppException, ErrorInCalcException {
-		Buffer<Integer> first = new Buffer<Integer>(10);
-		Buffer<Integer> second = new Buffer<Integer>(10);
-		Buffer<Integer> output = new Buffer<Integer>(10);
+		first = new Buffer<Integer>(10);
+		second = new Buffer<Integer>(10);
+		output = new Buffer<Integer>(10);
 		Sub sub = Sub.create(first, second, output);
 		sub.start();
 		first.put(1);
@@ -66,9 +71,9 @@ public class test {
 
 	@Test
 	public void testSubFalse() throws StoppException, ErrorInCalcException {
-		Buffer<Integer> first = new Buffer<Integer>(10);
-		Buffer<Integer> second = new Buffer<Integer>(10);
-		Buffer<Integer> output = new Buffer<Integer>(10);
+		first = new Buffer<Integer>(10);
+		second = new Buffer<Integer>(10);
+		output = new Buffer<Integer>(10);
 		Sub sub = Sub.create(first, second, output);
 		sub.start();
 		first.put(1);
@@ -80,9 +85,9 @@ public class test {
 
 	@Test
 	public void testMul() throws StoppException, ErrorInCalcException {
-		Buffer<Integer> first = new Buffer<Integer>(10);
-		Buffer<Integer> second = new Buffer<Integer>(10);
-		Buffer<Integer> output = new Buffer<Integer>(10);
+		first = new Buffer<Integer>(10);
+		second = new Buffer<Integer>(10);
+		output = new Buffer<Integer>(10);
 		Mul mul = Mul.create(first, second, output);
 		mul.start();
 		first.put(2);
@@ -94,9 +99,9 @@ public class test {
 
 	@Test
 	public void testMulFalse() throws StoppException, ErrorInCalcException {
-		Buffer<Integer> first = new Buffer<Integer>(10);
-		Buffer<Integer> second = new Buffer<Integer>(10);
-		Buffer<Integer> output = new Buffer<Integer>(10);
+		first = new Buffer<Integer>(10);
+		second = new Buffer<Integer>(10);
+		output = new Buffer<Integer>(10);
 		Mul mul = Mul.create(first, second, output);
 		mul.start();
 		first.put(6);
@@ -108,9 +113,9 @@ public class test {
 
 	@Test
 	public void testDiv() throws StoppException, ErrorInCalcException {
-		Buffer<Integer> first = new Buffer<Integer>(10);
-		Buffer<Integer> second = new Buffer<Integer>(10);
-		Buffer<Integer> output = new Buffer<Integer>(10);
+		first = new Buffer<Integer>(10);
+		second = new Buffer<Integer>(10);
+		output = new Buffer<Integer>(10);
 		Div div = Div.create(first, second, output);
 		div.start();
 		first.put(6);
@@ -122,9 +127,9 @@ public class test {
 
 	@Test
 	public void testDivFalse() throws StoppException, ErrorInCalcException {
-		Buffer<Integer> first = new Buffer<Integer>(10);
-		Buffer<Integer> second = new Buffer<Integer>(10);
-		Buffer<Integer> output = new Buffer<Integer>(10);
+		first = new Buffer<Integer>(10);
+		second = new Buffer<Integer>(10);
+		output = new Buffer<Integer>(10);
 		Div div = Div.create(first, second, output);
 		div.start();
 		first.put(6);
@@ -136,9 +141,9 @@ public class test {
 
 	@Test
 	public void testDivZero() throws StoppException, ErrorInCalcException {
-		Buffer<Integer> first = new Buffer<Integer>(10);
-		Buffer<Integer> second = new Buffer<Integer>(10);
-		Buffer<Integer> output = new Buffer<Integer>(10);
+		first = new Buffer<Integer>(10);
+		second = new Buffer<Integer>(10);
+		output = new Buffer<Integer>(10);
 		Div div = Div.create(first, second, output);
 		div.start();		
 		first.put(6);
@@ -153,9 +158,9 @@ public class test {
 
 	@Test
 	public void testChain() throws StoppException, ErrorInCalcException {
-		Buffer<Integer> first = new Buffer<Integer>(10);
-		Buffer<Integer> second = new Buffer<Integer>(10);
-		Buffer<Integer> output = new Buffer<Integer>(10);
+		first = new Buffer<Integer>(10);
+		second = new Buffer<Integer>(10);
+		output = new Buffer<Integer>(10);
 		Buffer<Integer> third = new Buffer<Integer>(10);
 		Buffer<Integer> lastoutput = new Buffer<Integer>(10);
 		Sub sub = Sub.create(first, second, output);
@@ -170,9 +175,9 @@ public class test {
 
 	@Test
 	public void testConstant() throws StoppException, ErrorInCalcException {
-		Buffer<Integer> first = new Buffer<Integer>(10);
+		first = new Buffer<Integer>(10);
 		Constant<Integer> second = new Constant<Integer>(3);
-		Buffer<Integer> output = new Buffer<Integer>(10);
+		output = new Buffer<Integer>(10);
 		Mul mul = Mul.create(first, second, output);
 		mul.start();
 		first.put(2);
