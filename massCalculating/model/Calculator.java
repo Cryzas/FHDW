@@ -5,7 +5,7 @@ import lockAndBuffer.Container;
 import lockAndBuffer.Buffer.ErrorInCalcException;
 import lockAndBuffer.Buffer.StoppException;
 
-public abstract class Calculator {
+public abstract class Calculator implements MyProcess<Integer> {
 
 	protected String description;
 	private final Container<Integer> buffer1;
@@ -17,6 +17,19 @@ public abstract class Calculator {
 		this.buffer1 = buffer1;
 		this.buffer2 = buffer2;
 		this.outputBuffer = outputBuffer;
+	}
+
+	public Container<Integer> getFirstBuffer() {
+		return this.buffer1;
+	}
+
+	public Container<Integer> getSecondBuffer() {
+		return this.buffer2;
+	}
+
+	@Override
+	public Buffer<Integer> getOutputBuffer() {
+		return this.outputBuffer;
 	}
 
 	public void start() {

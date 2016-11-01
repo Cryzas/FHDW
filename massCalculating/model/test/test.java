@@ -1,14 +1,21 @@
 package model.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
+import arithmetic.Addition;
+import arithmetic.ArithemticConstant;
+import arithmetic.Multiplication;
+import arithmetic.Variable;
 import lockAndBuffer.Buffer;
-import lockAndBuffer.Constant;
 import lockAndBuffer.Buffer.ErrorInCalcException;
 import lockAndBuffer.Buffer.StoppException;
+import lockAndBuffer.Constant;
 import model.Add;
+import model.ArithmeticProcess;
 import model.Cloner;
 import model.Div;
 import model.Mul;
@@ -157,10 +164,10 @@ public class test {
 		Buffer<Integer> output2 = new Buffer<Integer>(10);
 		Buffer<Integer> erg = new Buffer<Integer>(10);
 		Constant<Integer> five = new Constant<Integer>(5);
-		Cloner<Integer> cloner = new Cloner<Integer>(z,2);
+		Cloner<Integer> cloner = new Cloner<Integer>(z);
 		Mul mul1 = Mul.create(x, y, z);
-		Add add1 = Add.create(cloner.getList().get(0), five, output2);
-		Mul mul2 = Mul.create(cloner.getList().get(1), output2, erg);
+		Add add1 = Add.create(cloner.addNewClone(), five, output2);
+		Mul mul2 = Mul.create(cloner.addNewClone(), output2, erg);
 		cloner.start();
 		mul1.start();
 		add1.start();
@@ -179,11 +186,11 @@ public class test {
 		Buffer<Integer> erg = new Buffer<Integer>(10);
 		Buffer<Integer> erg2 = new Buffer<Integer>(10);
 		Constant<Integer> five = new Constant<Integer>(5);
-		Cloner<Integer> cloner = new Cloner<Integer>(z,3);
+		Cloner<Integer> cloner = new Cloner<Integer>(z);
 		Mul mul1 = Mul.create(x, y, z);
-		Add add1 = Add.create(cloner.getList().get(0), five, output2);
-		Mul mul2 = Mul.create(cloner.getList().get(1), output2, erg);
-		Sub sub1 = Sub.create(erg, cloner.getList().get(2), erg2);
+		Add add1 = Add.create(cloner.addNewClone(), five, output2);
+		Mul mul2 = Mul.create(cloner.addNewClone(), output2, erg);
+		Sub sub1 = Sub.create(erg, cloner.addNewClone(), erg2);
 		cloner.start();
 		mul1.start();
 		add1.start();
@@ -193,5 +200,61 @@ public class test {
 		y.put(3);
 		assertEquals(new Integer(60), erg2.get());
 	}
-
+	
+	@Test
+	public void testArithmeticsConstant() throws StoppException, ErrorInCalcException{
+		ArithemticConstant constant = new ArithemticConstant(3);
+		ArithmeticProcess processSystem = new ArithmeticProcess();
+		constant.create(processSystem);
+		assertEquals(new Integer(3), processSystem.getOutput().get());	
+	}
+	
+	@Test
+	public void testArithmeticsVariable() throws StoppException, ErrorInCalcException{
+		Variable var = new Variable();
+		ArithmeticProcess processSystem = new ArithmeticProcess();
+		var.create(processSystem);
+		processSystem.getInputs().get(0).put(2);
+		assertEquals(new Integer(2), processSystem.getOutput().get());	
+	}
+	
+	@Test
+	public void testArithmetics2() throws StoppException, ErrorInCalcException{
+		ArithemticConstant constant = new ArithemticConstant(3);
+		Variable var = new Variable();
+		Addition add = new Addition(var, constant);
+		ArithmeticProcess processSystem = new ArithmeticProcess();
+		add.create(processSystem);
+		processSystem.getInputs().get(0).put(2);
+		assertEquals(new Integer(5), processSystem.getOutput().get());
+	}
+	
+	@Test 
+	public void testArithmeticsChainConstant() throws StoppException, ErrorInCalcException {
+		ArithemticConstant constant2 = new ArithemticConstant(7);
+		Addition add = new Addition(constant2, constant2);
+		Multiplication mul = new Multiplication(add, constant2);
+		ArithmeticProcess processSystem = new ArithmeticProcess();
+		mul.create(processSystem);
+		assertEquals(new Integer(98), processSystem.getOutput().get());	
+	}
+	
+	@Test 
+	public void testArithmeticsChainVariable() throws StoppException, ErrorInCalcException {
+		Variable var = new Variable();
+		Addition add = new Addition(var, var);
+		Multiplication mul = new Multiplication(add, add);
+		ArithmeticProcess processSystem = new ArithmeticProcess();
+		mul.create(processSystem);
+		processSystem.getInputs().get(0).put(2);
+		assertEquals(new Integer(16), processSystem.getOutput().get());	
+	}
 }
+
+
+
+
+
+
+
+

@@ -5,20 +5,18 @@ import java.util.ArrayList;
 import lockAndBuffer.Buffer;
 import lockAndBuffer.Buffer.ErrorInCalcException;
 import lockAndBuffer.Buffer.StoppException;
+import lockAndBuffer.Container;
 
 public class Cloner<E> {
 
 	private ArrayList<Buffer<E>> list = new ArrayList<Buffer<E>>();
-	private Buffer<E> input;
+	private Container<E> input;
 
-	public Cloner(Buffer<E> buffer, int number) throws StoppException, ErrorInCalcException {
+	public Cloner(Container<E> buffer) {
 		this.input = buffer;
-		for (int i = 0; i < number; i++) {
-			list.add(new Buffer<E>(buffer.size()));
-		}
 	}
 
-	public void start() throws StoppException, ErrorInCalcException {
+	public void start() {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -31,17 +29,25 @@ public class Cloner<E> {
 						}
 					} catch (StoppException e) {
 						running = false;
+						for (int i = 0; i < list.size(); i++) {
+							list.get(i).stopp();
+						}
 					} catch (ErrorInCalcException e) {
 						running = false;
+						for (int i = 0; i < list.size(); i++) {
+							list.get(i).putCalcErrorException();
+						}
 					}
 				}
 			}
 		}, "Cloner").start();
 
 	}
-
-	public ArrayList<Buffer<E>> getList() {
-		return list;
+	
+	public Buffer<E> addNewClone() {
+		Buffer<E> buffer = new Buffer<E>(10);
+		this.list.add(buffer);
+		return buffer;
 	}
 
 }
