@@ -214,7 +214,7 @@ public class test {
 		Variable var = new Variable();
 		ArithmeticProcess processSystem = new ArithmeticProcess();
 		var.create(processSystem);
-		processSystem.getInputs().get(0).put(2);
+		processSystem.getInputs().get(var).put(2);
 		assertEquals(new Integer(2), processSystem.getOutput().get());	
 	}
 	
@@ -225,7 +225,7 @@ public class test {
 		Addition add = new Addition(var, constant);
 		ArithmeticProcess processSystem = new ArithmeticProcess();
 		add.create(processSystem);
-		processSystem.getInputs().get(0).put(2);
+		processSystem.getInputs().get(var).put(2);
 		assertEquals(new Integer(5), processSystem.getOutput().get());
 	}
 	
@@ -246,7 +246,7 @@ public class test {
 		Multiplication mul = new Multiplication(add, add);
 		ArithmeticProcess processSystem = new ArithmeticProcess();
 		mul.create(processSystem);
-		processSystem.getInputs().get(0).put(2);
+		processSystem.getInputs().get(var).put(2);
 		assertEquals(new Integer(16), processSystem.getOutput().get());	
 	}
 }

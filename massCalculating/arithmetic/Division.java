@@ -3,7 +3,6 @@ package arithmetic;
 import lockAndBuffer.Buffer;
 import lockAndBuffer.Container;
 import model.Div;
-import processSystem.ArithmeticExpression;
 import processSystem.MyProcess;
 
 public class Division extends ArithemticCalculation {

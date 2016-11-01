@@ -1,7 +1,6 @@
 package arithmetic;
 
 import lockAndBuffer.Buffer;
-import processSystem.ArithmeticExpression;
 import processSystem.ArithmeticProcess;
 import processSystem.MyProcess;
 import processSystem.Var;

@@ -1,6 +1,5 @@
 package processSystem;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import arithmetic.Variable;
@@ -12,7 +11,7 @@ public class ArithmeticProcess {
 	
 	private HashMap<Variable, Cloner<Integer>> varCloner = new HashMap<Variable, Cloner<Integer>>();
 	private HashMap<Container<Integer>, Cloner<Integer>> cloner = new HashMap<Container<Integer>, Cloner<Integer>>();
-	private ArrayList<Buffer<Integer>> inputs = new ArrayList<Buffer<Integer>>();
+	private HashMap<Variable, Buffer<Integer>> inputs = new HashMap<Variable, Buffer<Integer>>();
 	private Container<Integer> output;
 	
 	public void setOutput(Container<Integer> output){
@@ -35,7 +34,7 @@ public class ArithmeticProcess {
 		return output;
 	}
 	
-	public ArrayList<Buffer<Integer>> getInputs(){
+	public HashMap<Variable, Buffer<Integer>> getInputs(){
 		return inputs;
 	}
 	
@@ -48,7 +47,7 @@ public class ArithmeticProcess {
 			copier = new Cloner<Integer>(buffer);
 			copier.start();
 			varCloner.put(var, copier);
-			inputs.add(buffer);
+			inputs.put(var, buffer);
 		}
 		return copier.addNewClone();
 	}

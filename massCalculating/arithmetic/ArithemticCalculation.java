@@ -2,7 +2,6 @@ package arithmetic;
 
 import lockAndBuffer.Buffer;
 import lockAndBuffer.Container;
-import processSystem.ArithmeticExpression;
 import processSystem.ArithmeticProcess;
 import processSystem.MyProcess;
 

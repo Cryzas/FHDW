@@ -3,7 +3,6 @@ package arithmetic;
 import lockAndBuffer.Buffer;
 import lockAndBuffer.Container;
 import model.Mul;
-import processSystem.ArithmeticExpression;
 import processSystem.MyProcess;
 
 public class Multiplication extends ArithemticCalculation {
