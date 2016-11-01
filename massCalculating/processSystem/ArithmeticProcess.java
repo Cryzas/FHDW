@@ -1,4 +1,4 @@
-package model;
+package processSystem;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,6 +6,7 @@ import java.util.HashMap;
 import arithmetic.Variable;
 import lockAndBuffer.Buffer;
 import lockAndBuffer.Container;
+import model.Cloner;
 
 public class ArithmeticProcess {
 	

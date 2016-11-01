@@ -1,9 +1,10 @@
 package arithmetic;
 
 import lockAndBuffer.Constant;
-import model.ArithmeticProcess;
-import model.Const;
-import model.MyProcess;
+import processSystem.ArithmeticExpression;
+import processSystem.ArithmeticProcess;
+import processSystem.Const;
+import processSystem.MyProcess;
 
 public class ArithemticConstant implements ArithmeticExpression {
 	

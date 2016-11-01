@@ -15,11 +15,11 @@ import lockAndBuffer.Buffer.ErrorInCalcException;
 import lockAndBuffer.Buffer.StoppException;
 import lockAndBuffer.Constant;
 import model.Add;
-import model.ArithmeticProcess;
 import model.Cloner;
 import model.Div;
 import model.Mul;
 import model.Sub;
+import processSystem.ArithmeticProcess;
 
 public class test {
 	

@@ -2,8 +2,9 @@ package arithmetic;
 
 import lockAndBuffer.Buffer;
 import lockAndBuffer.Container;
-import model.ArithmeticProcess;
-import model.MyProcess;
+import processSystem.ArithmeticExpression;
+import processSystem.ArithmeticProcess;
+import processSystem.MyProcess;
 
 public abstract class ArithemticCalculation implements ArithmeticExpression{
 

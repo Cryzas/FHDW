@@ -1,9 +1,10 @@
 package arithmetic;
 
 import lockAndBuffer.Buffer;
-import model.ArithmeticProcess;
-import model.MyProcess;
-import model.Var;
+import processSystem.ArithmeticExpression;
+import processSystem.ArithmeticProcess;
+import processSystem.MyProcess;
+import processSystem.Var;
 
 public class Variable implements ArithmeticExpression{
 	

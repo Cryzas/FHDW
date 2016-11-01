@@ -1,7 +1,4 @@
-package arithmetic;
-
-import model.ArithmeticProcess;
-import model.MyProcess;
+package processSystem;
 
 public interface ArithmeticExpression {
 	

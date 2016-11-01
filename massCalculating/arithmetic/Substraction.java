@@ -2,8 +2,9 @@ package arithmetic;
 
 import lockAndBuffer.Buffer;
 import lockAndBuffer.Container;
-import model.MyProcess;
 import model.Sub;
+import processSystem.ArithmeticExpression;
+import processSystem.MyProcess;
 
 public class Substraction extends ArithemticCalculation {
 	
