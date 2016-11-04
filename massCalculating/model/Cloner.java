@@ -13,8 +13,8 @@ public class Cloner<E> {
 	private ArrayList<Container<E>> list = new ArrayList<Container<E>>();
 	private Container<E> input;
 
-	public Cloner(Container<E> buffer) {
-		this.input = buffer;
+	public Cloner(Container<E> container) {
+		this.input = container;
 	}
 
 	public void start() {
