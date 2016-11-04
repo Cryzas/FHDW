@@ -49,7 +49,7 @@ public class ArithmeticProcess {
 			varCloner.put(var, copier);
 			inputs.put(var, buffer);
 		}
-		return copier.addNewClone();
+		return (Buffer<Integer>) copier.addNewClone();
 	}
 	
 }

@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import lockAndBuffer.Buffer;
 import lockAndBuffer.Buffer.ErrorInCalcException;
 import lockAndBuffer.Buffer.StoppException;
+import lockAndBuffer.Constant;
 import lockAndBuffer.Container;
 
 public class Cloner<E> {
 
-	private ArrayList<Buffer<E>> list = new ArrayList<Buffer<E>>();
+	private ArrayList<Container<E>> list = new ArrayList<Container<E>>();
 	private Container<E> input;
 
 	public Cloner(Container<E> buffer) {
@@ -17,37 +18,46 @@ public class Cloner<E> {
 	}
 
 	public void start() {
+		if (input instanceof Buffer) {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				boolean running = true;
 				while (running) {
-					try {
+						try {
 						E value = input.get();
 						for (int i = 0; i < list.size(); i++) {
-							list.get(i).put(value);
+							((Buffer<E>) list.get(i)).put(value);
 						}
 					} catch (StoppException e) {
 						running = false;
 						for (int i = 0; i < list.size(); i++) {
-							list.get(i).stopp();
+							((Buffer<E>) list.get(i)).stopp();
 						}
 					} catch (ErrorInCalcException e) {
 						running = false;
 						for (int i = 0; i < list.size(); i++) {
-							list.get(i).putCalcErrorException();
+							((Buffer<E>) list.get(i)).putCalcErrorException();
 						}
 					}
 				}
 			}
 		}, "Cloner").start();
+		}
 
 	}
 	
-	public Buffer<E> addNewClone() {
-		Buffer<E> buffer = new Buffer<E>(10);
-		this.list.add(buffer);
-		return buffer;
+	public Container<E> addNewClone() {
+		if (input instanceof Buffer) {
+			Buffer<E> buffer = new Buffer<E>(10);
+			this.list.add(buffer);
+			return buffer;
+		} else if(input instanceof Constant){
+			Constant<E> constant = new Constant<E>(((Constant<E>)(input)).get());
+			this.list.add(constant);
+			return constant;
+		}
+		return null;
 	}
 
 }

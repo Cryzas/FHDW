@@ -249,6 +249,17 @@ public class test {
 		processSystem.getInputs().get(var).put(2);
 		assertEquals(new Integer(16), processSystem.getOutput().get());	
 	}
+	
+	@Test 
+	public void testArithmeticsChainVariable2() throws StoppException, ErrorInCalcException {
+		Variable var = new Variable();
+		Multiplication mul1 = new Multiplication(var, var);
+		Multiplication mul2 = new Multiplication(mul1, var);
+		ArithmeticProcess processSystem = new ArithmeticProcess();
+		mul2.create(processSystem);
+		processSystem.getInputs().get(var).put(2);
+		assertEquals(new Integer(8), processSystem.getOutput().get());	
+	}
 }
 
 
