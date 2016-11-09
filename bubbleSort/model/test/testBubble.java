@@ -138,5 +138,31 @@ public class testBubble {
 		Collections.sort(list);
 		assertEquals(list, sortedList);
 	}
+	
+	@Test
+	public void testListString() throws StoppException {
+		BubbleManager<String> manager = new BubbleManager<String>();
+		ArrayList<String> list = new ArrayList<String>();
+		list.add("");
+		list.add("test");
+		list.add("kfokf");
+		list.add("l");
+		List<String> sortedList = manager.sort(list);
+		Collections.sort(list);
+		assertEquals(list, sortedList);
+	}
+	
+	@Test
+	public void testListBoolean() throws StoppException {
+		BubbleManager<Boolean> manager = new BubbleManager<Boolean>();
+		ArrayList<Boolean> list = new ArrayList<Boolean>();
+		list.add(false);
+		list.add(true);
+		list.add(false);
+		list.add(true);
+		List<Boolean> sortedList = manager.sort(list);
+		Collections.sort(list);
+		assertEquals(list, sortedList);
+	}
 
 }
