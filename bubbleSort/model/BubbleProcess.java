@@ -29,11 +29,15 @@ public class BubbleProcess<T extends Comparable<T>> {
 					running = false;
 					outputBuffer.stopp();
 				}
+				// if first was stop the buffer was empty and second is not
+				// needed
 				if (running) {
 					try {
 						second = inputBuffer.get();
 					} catch (StoppException e) {
 						running = false;
+						// second is stop so one item in buffer which is put in
+						// output, because it is sorted
 						outputBuffer.put(first);
 						outputBuffer.stopp();
 					}
@@ -41,14 +45,20 @@ public class BubbleProcess<T extends Comparable<T>> {
 
 				while (running) {
 					try {
-						if (first.compareTo(second)<=0) {
+						if (first.compareTo(second) <= 0) {
+							// sorted
+							// put first in output, swap second to first and get
+							// new second
 							outputBuffer.put(first);
 							first = second;
 							second = inputBuffer.get();
 						} else {
 							// swap Items
 							outputBuffer.put(second);
+							// get new second
 							second = inputBuffer.get();
+							// if no next process was started, this process
+							// calls the manager to start a new process
 							if (!startedNext) {
 								manager.startNew(outputBuffer);
 								startedNext = true;
@@ -60,6 +70,7 @@ public class BubbleProcess<T extends Comparable<T>> {
 						running = false;
 					}
 				}
+				// log out from the manager
 				manager.logOut(BubbleProcess.this);
 			}
 		}, "BubbleProcess").start();

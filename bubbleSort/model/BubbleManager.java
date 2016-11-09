@@ -22,13 +22,16 @@ public class BubbleManager<T extends Comparable<T>> {
 	 */
 	public List<T> sort(List<T> list){
 		Buffer<T> buffer = new Buffer<T>();
+		// copy list in buffer
 		for (T t : list) {
 			buffer.put(t);
 		}
 		buffer.stopp();
+		// start sorting
 		startNew(buffer);
 		boolean running = true;
 		ArrayList<T> output = new ArrayList<T>();
+		// copy sorted buffer in output list
 		while(running) {
 			try {
 				output.add(outputBuffer.get());
@@ -44,7 +47,7 @@ public class BubbleManager<T extends Comparable<T>> {
 	}
 
 	/**
-	 * starts a new Process which sorts the buffer
+	 * starts a new Process which sorts the buffer and logs the process automatically in the manager
 	 */
 	public void startNew(Buffer<T> input) {
 		BubbleProcess<T> process = new BubbleProcess<T>(input, this);
