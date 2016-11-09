@@ -2,65 +2,29 @@ package model.test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.junit.Test;
 
 import lockAndBuffer.Buffer;
 import lockAndBuffer.Buffer.ErrorInCalcException;
 import lockAndBuffer.Buffer.StoppException;
 import model.BubbleManager;
-import model.BubbleProcess;
 
 public class testBubble {
-
-	@Test
-	public void test() throws StoppException, ErrorInCalcException {
-		Buffer<Integer> buffer = new Buffer<Integer>(100);
-		BubbleProcess process = new BubbleProcess(buffer);
-		process.start();
-		buffer.put(3);
-		buffer.put(2);
-		buffer.put(5);
-		buffer.put(4);
-		buffer.stopp();
-		assertEquals(new Integer(2), process.getOutputBuffer().get());
-		assertEquals(new Integer(3), process.getOutputBuffer().get());
-		assertEquals(new Integer(4), process.getOutputBuffer().get());
-		assertEquals(new Integer(5), process.getOutputBuffer().get());
-	}
-
-	@Test
-	public void test1() throws StoppException, ErrorInCalcException {
-		Buffer<Integer> buffer = new Buffer<Integer>(100);
-		BubbleProcess process = new BubbleProcess(buffer);
-		process.start();
-		buffer.stopp();
-		try {
-			assertEquals(new Integer(2), process.getOutputBuffer().get());
-			fail();
-		} catch (StoppException e) {
-		}
-	}
-	
-	@Test
-	public void test2() throws StoppException, ErrorInCalcException {
-		Buffer<Integer> buffer = new Buffer<Integer>(100);
-		BubbleProcess process = new BubbleProcess(buffer);
-		process.start();
-		buffer.put(2);
-		buffer.stopp();
-		assertEquals(new Integer(2), process.getOutputBuffer().get());
-	}
 	
 	@Test
 	public void test3() throws StoppException, ErrorInCalcException {
 		Buffer<Integer> buffer = new Buffer<Integer>(100);
 		BubbleManager manager = new BubbleManager();
-		buffer.put(5);
+		buffer.put(2);
 		buffer.put(4);
 		buffer.put(3);
-		buffer.put(2);
+		buffer.put(5);
 		buffer.stopp();
-		manager.startSorting(buffer);
+		manager.startNew(buffer);
 		assertEquals(new Integer(2), manager.getOutputBuffer().get());
 		assertEquals(new Integer(3), manager.getOutputBuffer().get());
 		assertEquals(new Integer(4), manager.getOutputBuffer().get());
@@ -84,7 +48,7 @@ public class testBubble {
 		buffer.put(7);
 		buffer.put(4);
 		buffer.stopp();
-		manager.startSorting(buffer);
+		manager.startNew(buffer);
 		assertEquals(new Integer(1), manager.getOutputBuffer().get());
 		assertEquals(new Integer(2), manager.getOutputBuffer().get());
 		assertEquals(new Integer(3), manager.getOutputBuffer().get());
@@ -103,6 +67,39 @@ public class testBubble {
 		} catch (StoppException | ErrorInCalcException e) {
 			
 		}
+		
+	}
+	
+	@Test
+	public void test5() throws StoppException, ErrorInCalcException {
+		BubbleManager manager = new BubbleManager();
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		list.add(4);
+		list.add(3);
+		list.add(2);
+		list.add(5);
+		List<Integer> sortedList = manager.sort(list);
+		Collections.sort(list);
+		assertEquals(list, sortedList);
+	}
+	
+	@Test
+	public void test6() throws StoppException, ErrorInCalcException {
+		BubbleManager manager = new BubbleManager();
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		List<Integer> sortedList = manager.sort(list);
+		Collections.sort(list);
+		assertEquals(list, sortedList);
+	}
+	
+	@Test
+	public void test7() throws StoppException, ErrorInCalcException {
+		BubbleManager manager = new BubbleManager();
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		list.add(4);
+		List<Integer> sortedList = manager.sort(list);
+		Collections.sort(list);
+		assertEquals(list, sortedList);
 	}
 
 }

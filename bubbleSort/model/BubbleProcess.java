@@ -8,11 +8,13 @@ public class BubbleProcess {
 
 	private Buffer<Integer> inputBuffer;
 	private Buffer<Integer> outputBuffer;
-	boolean callSupport = false;
+	boolean startedNext = false;
+	private BubbleManager manager;
 
-	public BubbleProcess(Buffer<Integer> inputBuffer) {
+	public BubbleProcess(Buffer<Integer> inputBuffer, BubbleManager manager) {
 		this.inputBuffer = inputBuffer;
 		this.outputBuffer = new Buffer<Integer>(100);
+		this.manager = manager;
 	}
 
 	public void start() {
@@ -28,13 +30,16 @@ public class BubbleProcess {
 					running = false;
 					outputBuffer.stopp();
 				}
-				try {
-					second = inputBuffer.get();
-				} catch (StoppException | ErrorInCalcException e1) {
-					running = false;
-					outputBuffer.put(first);
-					outputBuffer.stopp();
+				if (running) {
+					try {
+						second = inputBuffer.get();
+					} catch (StoppException | ErrorInCalcException e1) {
+						running = false;
+						outputBuffer.put(first);
+						outputBuffer.stopp();
+					}
 				}
+
 				while (running) {
 					try {
 						if (first <= second) {
@@ -42,9 +47,13 @@ public class BubbleProcess {
 							first = second;
 							second = inputBuffer.get();
 						} else {
+							// swap Items
 							outputBuffer.put(second);
 							second = inputBuffer.get();
-							BubbleProcess.this.callSupport = true;
+							if (!startedNext) {
+								manager.startNew(outputBuffer);
+								startedNext = true;
+							}
 						}
 					} catch (StoppException e) {
 						outputBuffer.put(first);
@@ -55,16 +64,13 @@ public class BubbleProcess {
 						outputBuffer.putCalcErrorException();
 					}
 				}
+				manager.logOut(BubbleProcess.this);
 			}
 		}, "BubbleProcess").start();
 	}
 
 	public Buffer<Integer> getOutputBuffer() {
 		return this.outputBuffer;
-	}
-
-	public boolean needsMedic() {
-		return callSupport;
 	}
 
 }
