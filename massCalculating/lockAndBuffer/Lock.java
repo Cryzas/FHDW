@@ -1,6 +1,6 @@
 package lockAndBuffer;
 
-import lockAndBufferSort.AbstractLock;
+import lockAndBuffer.AbstractLock;
 
 public class Lock implements AbstractLock {
 
