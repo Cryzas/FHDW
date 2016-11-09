@@ -14,10 +14,31 @@ import model.BubbleManager;
 
 public class testBubble {
 	
+	Buffer<Integer> buffer = new Buffer<Integer>();
+	BubbleManager<Integer> manager = new BubbleManager<Integer>();
+	
 	@Test
-	public void test3() throws StoppException{
-		Buffer<Integer> buffer = new Buffer<Integer>(100);
-		BubbleManager<Integer> manager = new BubbleManager<Integer>();
+	public void testBufferZero() throws StoppException{
+		buffer.stopp();
+		manager.startNew(buffer);
+		try {
+			manager.getOutputBuffer().get();
+			fail();
+		} catch (StoppException e) {
+			
+		}
+	}
+	
+	@Test
+	public void testBufferOne() throws StoppException{
+		buffer.put(2);
+		buffer.stopp();
+		manager.startNew(buffer);
+		assertEquals(new Integer(2), manager.getOutputBuffer().get());
+	}
+	
+	@Test
+	public void testBufferShort() throws StoppException{
 		buffer.put(2);
 		buffer.put(4);
 		buffer.put(3);
@@ -31,9 +52,7 @@ public class testBubble {
 	}
 	
 	@Test
-	public void test4() throws StoppException {
-		Buffer<Integer> buffer = new Buffer<Integer>(100);
-		BubbleManager<Integer> manager = new BubbleManager<Integer>();
+	public void testBufferLong() throws StoppException {
 		buffer.put(5);
 		buffer.put(2);
 		buffer.put(6);
@@ -41,9 +60,6 @@ public class testBubble {
 		buffer.put(9);
 		buffer.put(3);
 		buffer.put(8);
-		buffer.put(12);
-		buffer.put(11);
-		buffer.put(10);
 		buffer.put(7);
 		buffer.put(4);
 		buffer.stopp();
@@ -57,9 +73,6 @@ public class testBubble {
 		assertEquals(new Integer(7), manager.getOutputBuffer().get());
 		assertEquals(new Integer(8), manager.getOutputBuffer().get());
 		assertEquals(new Integer(9), manager.getOutputBuffer().get());
-		assertEquals(new Integer(10), manager.getOutputBuffer().get());
-		assertEquals(new Integer(11), manager.getOutputBuffer().get());
-		assertEquals(new Integer(12), manager.getOutputBuffer().get());
 		try {
 			manager.getOutputBuffer().get();
 			fail();
@@ -70,8 +83,24 @@ public class testBubble {
 	}
 	
 	@Test
-	public void test5() throws StoppException {
-		BubbleManager<Integer> manager = new BubbleManager<Integer>();
+	public void testListZero() throws StoppException {
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		List<Integer> sortedList = manager.sort(list);
+		Collections.sort(list);
+		assertEquals(list, sortedList);
+	}
+	
+	@Test
+	public void testListOne() throws StoppException {
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		list.add(4);
+		List<Integer> sortedList = manager.sort(list);
+		Collections.sort(list);
+		assertEquals(list, sortedList);
+	}
+	
+	@Test
+	public void testListShort() throws StoppException {
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		list.add(4);
 		list.add(3);
@@ -83,29 +112,25 @@ public class testBubble {
 	}
 	
 	@Test
-	public void test6() throws StoppException {
-		BubbleManager<Integer> manager = new BubbleManager<Integer>();
-		ArrayList<Integer> list = new ArrayList<Integer>();
-		List<Integer> sortedList = manager.sort(list);
-		Collections.sort(list);
-		assertEquals(list, sortedList);
-	}
-	
-	@Test
-	public void test7() throws StoppException {
-		BubbleManager<Integer> manager = new BubbleManager<Integer>();
+	public void testListLong() throws StoppException {
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		list.add(4);
+		list.add(3);
+		list.add(2);
+		list.add(5);
+		list.add(6);
+		list.add(5);
+		list.add(7);
+		list.add(2);
 		List<Integer> sortedList = manager.sort(list);
 		Collections.sort(list);
 		assertEquals(list, sortedList);
 	}
 	
 	@Test
-	public void test8() throws StoppException {
-		BubbleManager<Integer> manager = new BubbleManager<Integer>();
+	public void testListRandom() throws StoppException {
 		ArrayList<Integer> list = new ArrayList<Integer>();
-		for (int i = 0; i <= 50; i++) {
+		for (int i = 0; i <= 50*Math.random(); i++) {
 			list.add(i);
 		}
 		Collections.shuffle(list);
