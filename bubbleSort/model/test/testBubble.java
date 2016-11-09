@@ -23,7 +23,7 @@ public class testBubble {
 		manager.startNew(buffer);
 		try {
 			manager.getOutputBuffer().get();
-			fail();
+			fail("Exception expected");
 		} catch (StoppException e) {
 			
 		}
@@ -35,6 +35,12 @@ public class testBubble {
 		buffer.stopp();
 		manager.startNew(buffer);
 		assertEquals(new Integer(2), manager.getOutputBuffer().get());
+		try {
+			manager.getOutputBuffer().get();
+			fail("Exception expected");
+		} catch (StoppException e) {
+			
+		}
 	}
 	
 	@Test
@@ -49,6 +55,12 @@ public class testBubble {
 		assertEquals(new Integer(3), manager.getOutputBuffer().get());
 		assertEquals(new Integer(4), manager.getOutputBuffer().get());
 		assertEquals(new Integer(5), manager.getOutputBuffer().get());
+		try {
+			manager.getOutputBuffer().get();
+			fail("Exception expected");
+		} catch (StoppException e) {
+			
+		}
 	}
 	
 	@Test
@@ -57,9 +69,7 @@ public class testBubble {
 		buffer.put(2);
 		buffer.put(6);
 		buffer.put(1);
-		buffer.put(9);
 		buffer.put(3);
-		buffer.put(8);
 		buffer.put(7);
 		buffer.put(4);
 		buffer.stopp();
@@ -71,11 +81,9 @@ public class testBubble {
 		assertEquals(new Integer(5), manager.getOutputBuffer().get());
 		assertEquals(new Integer(6), manager.getOutputBuffer().get());
 		assertEquals(new Integer(7), manager.getOutputBuffer().get());
-		assertEquals(new Integer(8), manager.getOutputBuffer().get());
-		assertEquals(new Integer(9), manager.getOutputBuffer().get());
 		try {
 			manager.getOutputBuffer().get();
-			fail();
+			fail("Exception expected");
 		} catch (StoppException e) {
 			
 		}
