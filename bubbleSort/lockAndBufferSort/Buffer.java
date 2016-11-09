@@ -1,10 +1,9 @@
 
-package lockAndBuffer;
+package lockAndBufferSort;
 
-import lockAndBuffer.Container;
-import lockAndBuffer.Lock;
+import lockAndBufferSort.Lock;
 
-public class Buffer<E> implements Container<E> {
+public class Buffer<E> {
 	public static <E> Buffer<E> create(int capacity) {
 		return new Buffer<E>(capacity);
 	}
@@ -12,13 +11,9 @@ public class Buffer<E> implements Container<E> {
 	@SuppressWarnings("serial")
 	public static class StoppException extends Exception {
 	}
-	
-	@SuppressWarnings("serial")
-	public static class ErrorInCalcException extends Exception {
-	}
 
 	private abstract class BufferEntry<T> {
-		abstract T getWrapped() throws StoppException, ErrorInCalcException;
+		abstract T getWrapped() throws StoppException;
 	}
 
 	private class Stopp<T> extends BufferEntry<T> {
@@ -28,16 +23,6 @@ public class Buffer<E> implements Container<E> {
 		@Override
 		T getWrapped() throws StoppException {
 			throw new StoppException();
-		}
-	}
-	
-	private class CalcErrorEntry<T> extends BufferEntry<T> {
-		CalcErrorEntry() {
-		}
-
-		@Override
-		T getWrapped() throws ErrorInCalcException {
-			throw new ErrorInCalcException();
 		}
 	}
 
@@ -97,7 +82,7 @@ public class Buffer<E> implements Container<E> {
 		mutex.unlock();
 	}
 
-	public E get() throws StoppException, ErrorInCalcException {
+	public E get() throws StoppException {
 		mutex.lock();
 		while (this.isEmpty()) {
 			this.waitingForNotEmpty++;
@@ -134,10 +119,6 @@ public class Buffer<E> implements Container<E> {
 
 	public void stopp() {
 		this.put(new Stopp<E>());
-	}
-	
-	public void putCalcErrorException() {
-		this.put(new CalcErrorEntry<E>());		
 	}
 
 	private boolean isEmpty() {

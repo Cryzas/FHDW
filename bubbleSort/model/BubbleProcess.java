@@ -1,19 +1,18 @@
 package model;
 
-import lockAndBuffer.Buffer;
-import lockAndBuffer.Buffer.ErrorInCalcException;
-import lockAndBuffer.Buffer.StoppException;
+import lockAndBufferSort.Buffer;
+import lockAndBufferSort.Buffer.StoppException;
 
-public class BubbleProcess {
+public class BubbleProcess<T extends Comparable<T>> {
 
-	private Buffer<Integer> inputBuffer;
-	private Buffer<Integer> outputBuffer;
+	private Buffer<T> inputBuffer;
+	private Buffer<T> outputBuffer;
 	boolean startedNext = false;
-	private BubbleManager manager;
+	private BubbleManager<T> manager;
 
-	public BubbleProcess(Buffer<Integer> inputBuffer, BubbleManager manager) {
+	public BubbleProcess(Buffer<T> inputBuffer, BubbleManager<T> manager) {
 		this.inputBuffer = inputBuffer;
-		this.outputBuffer = new Buffer<Integer>(100);
+		this.outputBuffer = new Buffer<T>(100);
 		this.manager = manager;
 	}
 
@@ -21,19 +20,19 @@ public class BubbleProcess {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				Integer first = null;
-				Integer second = null;
+				T first = null;
+				T second = null;
 				boolean running = true;
 				try {
 					first = inputBuffer.get();
-				} catch (StoppException | ErrorInCalcException e1) {
+				} catch (StoppException e) {
 					running = false;
 					outputBuffer.stopp();
 				}
 				if (running) {
 					try {
 						second = inputBuffer.get();
-					} catch (StoppException | ErrorInCalcException e1) {
+					} catch (StoppException e) {
 						running = false;
 						outputBuffer.put(first);
 						outputBuffer.stopp();
@@ -42,7 +41,7 @@ public class BubbleProcess {
 
 				while (running) {
 					try {
-						if (first <= second) {
+						if (first.compareTo(second)<=0) {
 							outputBuffer.put(first);
 							first = second;
 							second = inputBuffer.get();
@@ -59,9 +58,6 @@ public class BubbleProcess {
 						outputBuffer.put(first);
 						outputBuffer.stopp();
 						running = false;
-					} catch (ErrorInCalcException e) {
-						running = false;
-						outputBuffer.putCalcErrorException();
 					}
 				}
 				manager.logOut(BubbleProcess.this);
@@ -69,7 +65,7 @@ public class BubbleProcess {
 		}, "BubbleProcess").start();
 	}
 
-	public Buffer<Integer> getOutputBuffer() {
+	public Buffer<T> getOutputBuffer() {
 		return this.outputBuffer;
 	}
 

@@ -3,10 +3,10 @@ package model;
 import java.util.ArrayList;
 
 import lockAndBuffer.Buffer;
-import lockAndBuffer.Buffer.ErrorInCalcException;
-import lockAndBuffer.Buffer.StoppException;
 import lockAndBuffer.Constant;
 import lockAndBuffer.Container;
+import lockAndBuffer.Buffer.ErrorInCalcException;
+import lockAndBuffer.Buffer.StoppException;
 
 public class Cloner<E> {
 

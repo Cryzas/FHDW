@@ -1,5 +1,7 @@
 package lockAndBuffer;
 
+import lockAndBuffer.Container;
+
 public class Constant<E> implements Container<E> {
 
 	E value;

@@ -4,51 +4,50 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import lockAndBuffer.Buffer;
-import lockAndBuffer.Buffer.ErrorInCalcException;
-import lockAndBuffer.Buffer.StoppException;
+import lockAndBufferSort.Buffer;
+import lockAndBufferSort.Buffer.StoppException;
 
-public class BubbleManager {
+public class BubbleManager<T extends Comparable<T>> {
 	
-	Buffer<Integer> outputBuffer;
-	private Collection<BubbleProcess> processList = new ArrayList<BubbleProcess>();
+	Buffer<T> outputBuffer;
+	private Collection<BubbleProcess<T>> processList = new ArrayList<BubbleProcess<T>>();
 
 	public BubbleManager() {
-		outputBuffer = new Buffer<Integer>(100);
+		outputBuffer = new Buffer<T>(100);
 	}
 	
 	/**
 	 * sorts the given @param list with bubbleSort
 	 * @return the sorted List
 	 */
-	public List<Integer> sort(List<Integer> list){
-		Buffer<Integer> buffer = new Buffer<Integer>(100);
-		for (Integer integer : list) {
-			buffer.put(integer);
+	public List<T> sort(List<T> list){
+		Buffer<T> buffer = new Buffer<T>(100);
+		for (T t : list) {
+			buffer.put(t);
 		}
 		buffer.stopp();
 		startNew(buffer);
 		boolean running = true;
-		ArrayList<Integer> output = new ArrayList<Integer>();
+		ArrayList<T> output = new ArrayList<T>();
 		while(running) {
 			try {
 				output.add(outputBuffer.get());
-			} catch (StoppException | ErrorInCalcException e) {
+			} catch (StoppException e) {
 				running = false;
 			}
 		}
 		return output;
 	}
 
-	public Buffer<Integer> getOutputBuffer() {
+	public Buffer<T> getOutputBuffer() {
 		return this.outputBuffer;
 	}
 
 	/**
 	 * starts a new Process which sorts the buffer
 	 */
-	public void startNew(Buffer<Integer> input) {
-		BubbleProcess process = new BubbleProcess(input, this);
+	public void startNew(Buffer<T> input) {
+		BubbleProcess<T> process = new BubbleProcess<T>(input, this);
 		process.start();
 		logIn(process);
 	}
@@ -56,21 +55,21 @@ public class BubbleManager {
 	/**
 	 * logs the given process in to the list
 	 */
-	public synchronized void logIn(BubbleProcess process) {
+	public synchronized void logIn(BubbleProcess<T> process) {
 		processList.add(process);
 	}
 
 	/**
 	 * logs the given process out from the list
 	 */
-	public synchronized void logOut(BubbleProcess process) {
+	public synchronized void logOut(BubbleProcess<T> process) {
 		processList.remove(process);
 		if (processList.isEmpty()) {
 			boolean running = true;
 			while(running){
 				try {
 					outputBuffer.put(process.getOutputBuffer().get());
-				} catch (StoppException | ErrorInCalcException e) {
+				} catch (StoppException e) {
 					outputBuffer.stopp();
 					running = false;
 				}

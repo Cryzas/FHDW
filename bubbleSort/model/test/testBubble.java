@@ -8,17 +8,16 @@ import java.util.List;
 
 import org.junit.Test;
 
-import lockAndBuffer.Buffer;
-import lockAndBuffer.Buffer.ErrorInCalcException;
-import lockAndBuffer.Buffer.StoppException;
+import lockAndBufferSort.Buffer;
+import lockAndBufferSort.Buffer.StoppException;
 import model.BubbleManager;
 
 public class testBubble {
 	
 	@Test
-	public void test3() throws StoppException, ErrorInCalcException {
+	public void test3() throws StoppException{
 		Buffer<Integer> buffer = new Buffer<Integer>(100);
-		BubbleManager manager = new BubbleManager();
+		BubbleManager<Integer> manager = new BubbleManager<Integer>();
 		buffer.put(2);
 		buffer.put(4);
 		buffer.put(3);
@@ -32,9 +31,9 @@ public class testBubble {
 	}
 	
 	@Test
-	public void test4() throws StoppException, ErrorInCalcException {
+	public void test4() throws StoppException {
 		Buffer<Integer> buffer = new Buffer<Integer>(100);
-		BubbleManager manager = new BubbleManager();
+		BubbleManager<Integer> manager = new BubbleManager<Integer>();
 		buffer.put(5);
 		buffer.put(2);
 		buffer.put(6);
@@ -64,15 +63,15 @@ public class testBubble {
 		try {
 			manager.getOutputBuffer().get();
 			fail();
-		} catch (StoppException | ErrorInCalcException e) {
+		} catch (StoppException e) {
 			
 		}
 		
 	}
 	
 	@Test
-	public void test5() throws StoppException, ErrorInCalcException {
-		BubbleManager manager = new BubbleManager();
+	public void test5() throws StoppException {
+		BubbleManager<Integer> manager = new BubbleManager<Integer>();
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		list.add(4);
 		list.add(3);
@@ -84,8 +83,8 @@ public class testBubble {
 	}
 	
 	@Test
-	public void test6() throws StoppException, ErrorInCalcException {
-		BubbleManager manager = new BubbleManager();
+	public void test6() throws StoppException {
+		BubbleManager<Integer> manager = new BubbleManager<Integer>();
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		List<Integer> sortedList = manager.sort(list);
 		Collections.sort(list);
@@ -93,8 +92,8 @@ public class testBubble {
 	}
 	
 	@Test
-	public void test7() throws StoppException, ErrorInCalcException {
-		BubbleManager manager = new BubbleManager();
+	public void test7() throws StoppException {
+		BubbleManager<Integer> manager = new BubbleManager<Integer>();
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		list.add(4);
 		List<Integer> sortedList = manager.sort(list);
