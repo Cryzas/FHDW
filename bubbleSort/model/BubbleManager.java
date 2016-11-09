@@ -13,7 +13,7 @@ public class BubbleManager<T extends Comparable<T>> {
 	private Collection<BubbleProcess<T>> processList = new ArrayList<BubbleProcess<T>>();
 
 	public BubbleManager() {
-		outputBuffer = new Buffer<T>(100);
+		outputBuffer = new Buffer<T>(10000000);
 	}
 	
 	/**
@@ -21,7 +21,7 @@ public class BubbleManager<T extends Comparable<T>> {
 	 * @return the sorted List
 	 */
 	public List<T> sort(List<T> list){
-		Buffer<T> buffer = new Buffer<T>(100);
+		Buffer<T> buffer = new Buffer<T>(10000000);
 		for (T t : list) {
 			buffer.put(t);
 		}

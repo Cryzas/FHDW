@@ -12,7 +12,7 @@ public class BubbleProcess<T extends Comparable<T>> {
 
 	public BubbleProcess(Buffer<T> inputBuffer, BubbleManager<T> manager) {
 		this.inputBuffer = inputBuffer;
-		this.outputBuffer = new Buffer<T>(100);
+		this.outputBuffer = new Buffer<T>(10000000);
 		this.manager = manager;
 	}
 
