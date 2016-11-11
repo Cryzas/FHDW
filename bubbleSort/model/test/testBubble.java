@@ -129,10 +129,32 @@ public class testBubble {
 		list.add(6);
 		list.add(5);
 		list.add(7);
-		list.add(2);
 		List<Integer> sortedList = manager.sort(list);
 		Collections.sort(list);
 		assertEquals(list, sortedList);
+	}
+	
+	@Test
+	public void testList2Lists() throws StoppException {
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		list.add(4);
+		list.add(3);
+		list.add(2);
+		list.add(5);
+		list.add(6);
+		list.add(5);
+		list.add(7);
+		ArrayList<Integer> list2 = new ArrayList<Integer>();
+		list2.add(4);
+		list2.add(3);
+		list2.add(2);
+		list2.add(5);
+		List<Integer> sortedList = manager.sort(list);
+		Collections.sort(list);
+		List<Integer> sortedList2 = manager.sort(list2);
+		Collections.sort(list2);
+		assertEquals(list, sortedList);
+		assertEquals(list2, sortedList2);
 	}
 	
 	@Test

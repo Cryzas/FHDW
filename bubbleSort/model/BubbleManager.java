@@ -21,6 +21,7 @@ public class BubbleManager<T extends Comparable<T>> {
 	 * @return the sorted List
 	 */
 	public List<T> sort(List<T> list){
+		outputBuffer = new Buffer<T>();
 		Buffer<T> buffer = new Buffer<T>();
 		// copy list in buffer
 		for (T t : list) {
