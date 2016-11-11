@@ -151,10 +151,11 @@ public class testBubble {
 	public void testListString() throws StoppException {
 		BubbleManager<String> manager = new BubbleManager<String>();
 		ArrayList<String> list = new ArrayList<String>();
+		list.add("CE");
+		list.add("GH");
+		list.add("AD");
 		list.add("");
-		list.add("test");
-		list.add("kfokf");
-		list.add("l");
+		list.add("AB");
 		List<String> sortedList = manager.sort(list);
 		Collections.sort(list);
 		assertEquals(list, sortedList);
