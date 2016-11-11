@@ -8,19 +8,20 @@ import lockAndBufferSort.Buffer;
 import lockAndBufferSort.Buffer.StoppException;
 
 public class BubbleManager<T extends Comparable<T>> {
-	
+
 	Buffer<T> outputBuffer;
 	private Collection<BubbleProcess<T>> processList = new ArrayList<BubbleProcess<T>>();
 
 	public BubbleManager() {
 		outputBuffer = new Buffer<T>();
 	}
-	
+
 	/**
 	 * sorts the given @param list with bubbleSort
+	 * 
 	 * @return the sorted List
 	 */
-	public List<T> sort(List<T> list){
+	public List<T> sort(List<T> list) {
 		outputBuffer = new Buffer<T>();
 		Buffer<T> buffer = new Buffer<T>();
 		// copy list in buffer
@@ -33,7 +34,7 @@ public class BubbleManager<T extends Comparable<T>> {
 		boolean running = true;
 		ArrayList<T> output = new ArrayList<T>();
 		// copy sorted buffer in output list
-		while(running) {
+		while (running) {
 			try {
 				output.add(outputBuffer.get());
 			} catch (StoppException e) {
@@ -48,7 +49,8 @@ public class BubbleManager<T extends Comparable<T>> {
 	}
 
 	/**
-	 * starts a new Process which sorts the buffer and logs the process automatically in the manager
+	 * starts a new Process which sorts the buffer and logs the process
+	 * automatically in the manager
 	 */
 	public void startNew(Buffer<T> input) {
 		BubbleProcess<T> process = new BubbleProcess<T>(input, this);
@@ -70,7 +72,7 @@ public class BubbleManager<T extends Comparable<T>> {
 		processList.remove(process);
 		if (processList.isEmpty()) {
 			boolean running = true;
-			while(running){
+			while (running) {
 				try {
 					outputBuffer.put(process.getOutputBuffer().get());
 				} catch (StoppException e) {
