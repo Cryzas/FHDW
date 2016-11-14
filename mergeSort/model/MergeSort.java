@@ -19,10 +19,6 @@ public class MergeSort<T extends Comparable<T>> {
 			public void run() {
 				final MergeSort<T> sortLeft = new MergeSort<T>(new Buffer<>());
 				final MergeSort<T> sortRight = new MergeSort<T>(new Buffer<>());
-				final Merger<T> merger = new Merger<T>(sortLeft.outputBuffer, sortRight.outputBuffer, outputBuffer);
-				sortLeft.start();
-				sortRight.start();
-				merger.start();
 				boolean running = true;
 				T t = null;
 				try {
@@ -44,6 +40,12 @@ public class MergeSort<T extends Comparable<T>> {
 						outputBuffer.put(t);
 						outputBuffer.stopp();
 					}
+				}
+				if (running) {
+					final Merger<T> merger = new Merger<T>(sortLeft.outputBuffer, sortRight.outputBuffer, outputBuffer);
+					sortLeft.start();
+					sortRight.start();
+					merger.start();
 				}
 				boolean left = false;
 				while (running) {
