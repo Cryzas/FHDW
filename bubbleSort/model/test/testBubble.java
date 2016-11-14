@@ -11,11 +11,13 @@ import org.junit.Test;
 import lockAndBufferSort.Buffer;
 import lockAndBufferSort.Buffer.StoppException;
 import model.BubbleManager;
+import model.Sorter;
 
 public class testBubble {
 
 	Buffer<Integer> buffer = new Buffer<Integer>();
 	BubbleManager<Integer> manager = new BubbleManager<Integer>();
+	Sorter<Integer> sorter = new Sorter<Integer>();
 
 	@Test
 	public void testBufferZero() throws StoppException {
@@ -93,7 +95,7 @@ public class testBubble {
 	@Test
 	public void testListZero() throws StoppException {
 		ArrayList<Integer> list = new ArrayList<Integer>();
-		List<Integer> sortedList = manager.sort(list);
+		List<Integer> sortedList = sorter.bubbleSort(list);
 		Collections.sort(list);
 		assertEquals(list, sortedList);
 	}
@@ -102,7 +104,7 @@ public class testBubble {
 	public void testListOne() throws StoppException {
 		ArrayList<Integer> list = new ArrayList<Integer>();
 		list.add(4);
-		List<Integer> sortedList = manager.sort(list);
+		List<Integer> sortedList = sorter.bubbleSort(list);
 		Collections.sort(list);
 		assertEquals(list, sortedList);
 	}
@@ -114,7 +116,7 @@ public class testBubble {
 		list.add(3);
 		list.add(2);
 		list.add(5);
-		List<Integer> sortedList = manager.sort(list);
+		List<Integer> sortedList = sorter.bubbleSort(list);
 		Collections.sort(list);
 		assertEquals(list, sortedList);
 	}
@@ -129,7 +131,7 @@ public class testBubble {
 		list.add(6);
 		list.add(5);
 		list.add(7);
-		List<Integer> sortedList = manager.sort(list);
+		List<Integer> sortedList = sorter.bubbleSort(list);
 		Collections.sort(list);
 		assertEquals(list, sortedList);
 	}
@@ -149,9 +151,9 @@ public class testBubble {
 		list2.add(3);
 		list2.add(2);
 		list2.add(5);
-		List<Integer> sortedList = manager.sort(list);
+		List<Integer> sortedList = sorter.bubbleSort(list);
 		Collections.sort(list);
-		List<Integer> sortedList2 = manager.sort(list2);
+		List<Integer> sortedList2 = sorter.bubbleSort(list2);
 		Collections.sort(list2);
 		assertEquals(list, sortedList);
 		assertEquals(list2, sortedList2);
@@ -164,34 +166,34 @@ public class testBubble {
 			list.add(i);
 		}
 		Collections.shuffle(list);
-		List<Integer> sortedList = manager.sort(list);
+		List<Integer> sortedList = sorter.bubbleSort(list);
 		Collections.sort(list);
 		assertEquals(list, sortedList);
 	}
 
 	@Test
 	public void testListString() throws StoppException {
-		BubbleManager<String> manager = new BubbleManager<String>();
 		ArrayList<String> list = new ArrayList<String>();
 		list.add("CE");
 		list.add("GH");
 		list.add("AD");
 		list.add("");
 		list.add("AB");
-		List<String> sortedList = manager.sort(list);
+		Sorter<String> sorter = new Sorter<String>();
+		List<String> sortedList = sorter.bubbleSort(list);
 		Collections.sort(list);
 		assertEquals(list, sortedList);
 	}
 
 	@Test
 	public void testListBoolean() throws StoppException {
-		BubbleManager<Boolean> manager = new BubbleManager<Boolean>();
 		ArrayList<Boolean> list = new ArrayList<Boolean>();
 		list.add(false);
 		list.add(true);
 		list.add(false);
 		list.add(true);
-		List<Boolean> sortedList = manager.sort(list);
+		Sorter<Boolean> sorter = new Sorter<Boolean>();
+		List<Boolean> sortedList = sorter.bubbleSort(list);
 		Collections.sort(list);
 		assertEquals(list, sortedList);
 	}

@@ -2,11 +2,16 @@ package model.test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import org.junit.Test;
 
 import lockAndBufferSort.Buffer;
 import lockAndBufferSort.Buffer.StoppException;
 import model.MergeSort;
+import model.Sorter;
 
 public class testMerge {
 
@@ -86,6 +91,19 @@ public class testMerge {
 		assertEquals(new Integer(25), mergeSort.getOutputBuffer().get());
 		assertEquals(new Integer(37), mergeSort.getOutputBuffer().get());
 		assertEquals(new Integer(111), mergeSort.getOutputBuffer().get());
+	}
+	
+	@Test
+	public void testListRandom() throws StoppException {
+		ArrayList<Integer> list = new ArrayList<Integer>();
+		for (int i = 0; i <= 1000; i++) {
+			list.add(i);
+		}
+		Sorter<Integer> sorter = new Sorter<Integer>();
+		Collections.shuffle(list);
+		List<Integer> sortedList = sorter.mergeSort(list);
+		Collections.sort(list);
+		assertEquals(list, sortedList);
 	}
 
 }

@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import lockAndBufferSort.Buffer;
 import lockAndBufferSort.Buffer.StoppException;
@@ -14,34 +13,6 @@ public class BubbleManager<T extends Comparable<T>> {
 
 	public BubbleManager() {
 		outputBuffer = new Buffer<T>();
-	}
-
-	/**
-	 * sorts the given @param list with bubbleSort
-	 * 
-	 * @return the sorted List
-	 */
-	public List<T> sort(final List<T> list) {
-		outputBuffer = new Buffer<T>();
-		final Buffer<T> buffer = new Buffer<T>();
-		// copy list in buffer
-		for (final T t : list) {
-			buffer.put(t);
-		}
-		buffer.stopp();
-		// start sorting
-		startNew(buffer);
-		boolean running = true;
-		final ArrayList<T> output = new ArrayList<T>();
-		// copy sorted buffer in output list
-		while (running) {
-			try {
-				output.add(outputBuffer.get());
-			} catch (final StoppException e) {
-				running = false;
-			}
-		}
-		return output;
 	}
 
 	public Buffer<T> getOutputBuffer() {

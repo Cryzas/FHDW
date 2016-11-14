@@ -4,6 +4,7 @@
 	<classpathentry kind="src" path="massCalculating"/>
 	<classpathentry kind="src" path="bubbleSort"/>
 	<classpathentry kind="src" path="mergeSort"/>
+	<classpathentry kind="src" path="Sorter"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>

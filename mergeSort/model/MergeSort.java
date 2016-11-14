@@ -9,8 +9,8 @@ public class MergeSort<T extends Comparable<T>> {
 	private Buffer<T> outputBuffer;
 
 	public MergeSort(Buffer<T> input) {
-		this.inputBuffer = input;
-		outputBuffer = new Buffer<T>();
+		this.setInputBuffer(input);
+		setOutputBuffer(new Buffer<T>());
 	}
 
 	public void start() {
@@ -22,27 +22,28 @@ public class MergeSort<T extends Comparable<T>> {
 				boolean running = true;
 				T t = null;
 				try {
-					t = inputBuffer.get();
+					t = getInputBuffer().get();
 				} catch (final StoppException e) {
 					running = false;
-					sortLeft.inputBuffer.stopp();
-					sortRight.inputBuffer.stopp();
-					outputBuffer.stopp();
+					sortLeft.getInputBuffer().stopp();
+					sortRight.getInputBuffer().stopp();
+					getOutputBuffer().stopp();
 				}
 				if (running) {
 					try {
-						sortRight.inputBuffer.put(inputBuffer.get());
-						sortLeft.inputBuffer.put(t);
+						sortRight.getInputBuffer().put(getInputBuffer().get());
+						sortLeft.getInputBuffer().put(t);
 					} catch (final StoppException e) {
 						running = false;
-						sortLeft.inputBuffer.stopp();
-						sortRight.inputBuffer.stopp();
-						outputBuffer.put(t);
-						outputBuffer.stopp();
+						sortLeft.getInputBuffer().stopp();
+						sortRight.getInputBuffer().stopp();
+						getOutputBuffer().put(t);
+						getOutputBuffer().stopp();
 					}
 				}
 				if (running) {
-					final Merger<T> merger = new Merger<T>(sortLeft.outputBuffer, sortRight.outputBuffer, outputBuffer);
+					final Merger<T> merger = new Merger<T>(sortLeft.getOutputBuffer(), sortRight.getOutputBuffer(),
+							getOutputBuffer());
 					sortLeft.start();
 					sortRight.start();
 					merger.start();
@@ -51,14 +52,14 @@ public class MergeSort<T extends Comparable<T>> {
 				while (running) {
 					try {
 						if (left) {
-							sortLeft.inputBuffer.put(inputBuffer.get());
+							sortLeft.getInputBuffer().put(getInputBuffer().get());
 						} else {
-							sortRight.inputBuffer.put(inputBuffer.get());
+							sortRight.getInputBuffer().put(getInputBuffer().get());
 						}
 						left = !left;
 					} catch (final StoppException e) {
-						sortLeft.inputBuffer.stopp();
-						sortRight.inputBuffer.stopp();
+						sortLeft.getInputBuffer().stopp();
+						sortRight.getInputBuffer().stopp();
 						running = false;
 					}
 				}
@@ -68,6 +69,18 @@ public class MergeSort<T extends Comparable<T>> {
 
 	public Buffer<T> getOutputBuffer() {
 		return outputBuffer;
+	}
+
+	public void setOutputBuffer(Buffer<T> outputBuffer) {
+		this.outputBuffer = outputBuffer;
+	}
+
+	public Buffer<T> getInputBuffer() {
+		return inputBuffer;
+	}
+
+	public void setInputBuffer(Buffer<T> inputBuffer) {
+		this.inputBuffer = inputBuffer;
 	}
 
 }
