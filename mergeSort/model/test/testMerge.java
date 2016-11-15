@@ -16,7 +16,7 @@ import model.Sorter;
 public class testMerge {
 
 	@Test
-	public void test() throws StoppException {
+	public void test2() throws StoppException {
 		Buffer<Integer> buffer = new Buffer<Integer>();
 		buffer.put(111);
 		buffer.put(37);
@@ -28,7 +28,7 @@ public class testMerge {
 	}
 
 	@Test
-	public void test2() throws StoppException {
+	public void test0() throws StoppException {
 		Buffer<Integer> buffer = new Buffer<Integer>();
 		buffer.stopp();
 		MergeSort<Integer> mergeSort = new MergeSort<Integer>(buffer);
@@ -42,7 +42,7 @@ public class testMerge {
 	}
 	
 	@Test
-	public void test3() throws StoppException {
+	public void test1() throws StoppException {
 		Buffer<Integer> buffer = new Buffer<Integer>();
 		buffer.put(25);
 		buffer.stopp();
@@ -74,7 +74,7 @@ public class testMerge {
 	}
 	
 	@Test
-	public void test5() throws StoppException {
+	public void test6() throws StoppException {
 		Buffer<Integer> buffer = new Buffer<Integer>();
 		MergeSort<Integer> mergeSort = new MergeSort<Integer>(buffer);
 		mergeSort.start();

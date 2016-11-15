@@ -25,8 +25,6 @@ public class MergeSort<T extends Comparable<T>> {
 					t = getInputBuffer().get();
 				} catch (final StoppException e) {
 					running = false;
-					sortLeft.getInputBuffer().stopp();
-					sortRight.getInputBuffer().stopp();
 					getOutputBuffer().stopp();
 				}
 				if (running) {
@@ -35,8 +33,6 @@ public class MergeSort<T extends Comparable<T>> {
 						sortLeft.getInputBuffer().put(t);
 					} catch (final StoppException e) {
 						running = false;
-						sortLeft.getInputBuffer().stopp();
-						sortRight.getInputBuffer().stopp();
 						getOutputBuffer().put(t);
 						getOutputBuffer().stopp();
 					}
