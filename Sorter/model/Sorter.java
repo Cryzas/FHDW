@@ -70,5 +70,36 @@ public class Sorter<T extends Comparable<T>> {
 		}
 		return output;
 	}
+	
+	/**
+	 * sorts the given @param list with quickSort
+	 * 
+	 * @return the sorted List
+	 */
+	public List<T> quickSort(final List<T> list) {
+		
+		final Buffer<T> buffer = new Buffer<T>();
+		// copy list in buffer
+		for (final T t : list) {
+			buffer.put(t);
+		}
+		buffer.stopp();
+		// start sorting
+		QuickSort<T> quickSort = new QuickSort<T>(buffer);
+		quickSort.start();
+		quickSort.setInputBuffer(buffer);
+		quickSort.setOutputBuffer(new Buffer<T>());
+		boolean running = true;
+		final ArrayList<T> output = new ArrayList<T>();
+		// copy sorted buffer in output list
+		while (running) {
+			try {
+				output.add(quickSort.getOutputBuffer().get());
+			} catch (final StoppException e) {
+				running = false;
+			}
+		}
+		return output;
+	}
 
 }
