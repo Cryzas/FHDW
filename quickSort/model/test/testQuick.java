@@ -10,10 +10,10 @@ import org.junit.Test;
 
 import lockAndBufferSort.Buffer;
 import lockAndBufferSort.Buffer.StoppException;
-import model.MergeSort;
+import model.QuickSort;
 import model.Sorter;
 
-public class testMerge {
+public class testQuick {
 
 	@Test
 	public void test2() throws StoppException {
@@ -21,20 +21,20 @@ public class testMerge {
 		buffer.put(111);
 		buffer.put(37);
 		buffer.stopp();
-		MergeSort<Integer> mergeSort = new MergeSort<Integer>(buffer);
-		mergeSort.start();
-		assertEquals(new Integer(37), mergeSort.getOutputBuffer().get());
-		assertEquals(new Integer(111), mergeSort.getOutputBuffer().get());
+		QuickSort<Integer> quickSort = new QuickSort<Integer>(buffer);
+		quickSort.start();
+		assertEquals(new Integer(37), quickSort.getOutputBuffer().get());
+		assertEquals(new Integer(111), quickSort.getOutputBuffer().get());
 	}
 
 	@Test
 	public void test0() throws StoppException {
 		Buffer<Integer> buffer = new Buffer<Integer>();
 		buffer.stopp();
-		MergeSort<Integer> mergeSort = new MergeSort<Integer>(buffer);
-		mergeSort.start();
+		QuickSort<Integer> quickSort = new QuickSort<Integer>(buffer);
+		quickSort.start();
 		try {
-			mergeSort.getOutputBuffer().get();
+			quickSort.getOutputBuffer().get();
 			fail();
 		} catch (StoppException e) {
 		}
@@ -46,11 +46,11 @@ public class testMerge {
 		Buffer<Integer> buffer = new Buffer<Integer>();
 		buffer.put(25);
 		buffer.stopp();
-		MergeSort<Integer> mergeSort = new MergeSort<Integer>(buffer);
-		mergeSort.start();
-		assertEquals(new Integer(25), mergeSort.getOutputBuffer().get());
+		QuickSort<Integer> quickSort = new QuickSort<Integer>(buffer);
+		quickSort.start();
+		assertEquals(new Integer(25), quickSort.getOutputBuffer().get());
 		try {
-			mergeSort.getOutputBuffer().get();
+			quickSort.getOutputBuffer().get();
 			fail();
 		} catch (StoppException e) {
 		}
@@ -65,19 +65,17 @@ public class testMerge {
 		buffer.put(15);
 		buffer.put(1);
 		buffer.stopp();
-		MergeSort<Integer> mergeSort = new MergeSort<Integer>(buffer);
-		mergeSort.start();
-		assertEquals(new Integer(1), mergeSort.getOutputBuffer().get());
-		assertEquals(new Integer(15), mergeSort.getOutputBuffer().get());
-		assertEquals(new Integer(37), mergeSort.getOutputBuffer().get());
-		assertEquals(new Integer(111), mergeSort.getOutputBuffer().get());
+		QuickSort<Integer> quickSort = new QuickSort<Integer>(buffer);
+		quickSort.start();
+		assertEquals(new Integer(1), quickSort.getOutputBuffer().get());
+		assertEquals(new Integer(15), quickSort.getOutputBuffer().get());
+		assertEquals(new Integer(37), quickSort.getOutputBuffer().get());
+		assertEquals(new Integer(111), quickSort.getOutputBuffer().get());
 	}
 	
 	@Test
 	public void test6() throws StoppException {
 		Buffer<Integer> buffer = new Buffer<Integer>();
-		MergeSort<Integer> mergeSort = new MergeSort<Integer>(buffer);
-		mergeSort.start();
 		buffer.put(111);
 		buffer.put(17);
 		buffer.put(37);
@@ -85,12 +83,14 @@ public class testMerge {
 		buffer.put(1);
 		buffer.put(25);
 		buffer.stopp();
-		assertEquals(new Integer(1), mergeSort.getOutputBuffer().get());
-		assertEquals(new Integer(15), mergeSort.getOutputBuffer().get());
-		assertEquals(new Integer(17), mergeSort.getOutputBuffer().get());
-		assertEquals(new Integer(25), mergeSort.getOutputBuffer().get());
-		assertEquals(new Integer(37), mergeSort.getOutputBuffer().get());
-		assertEquals(new Integer(111), mergeSort.getOutputBuffer().get());
+		QuickSort<Integer> quickSort = new QuickSort<Integer>(buffer);
+		quickSort.start();
+		assertEquals(new Integer(1), quickSort.getOutputBuffer().get());
+		assertEquals(new Integer(15), quickSort.getOutputBuffer().get());
+		assertEquals(new Integer(17), quickSort.getOutputBuffer().get());
+		assertEquals(new Integer(25), quickSort.getOutputBuffer().get());
+		assertEquals(new Integer(37), quickSort.getOutputBuffer().get());
+		assertEquals(new Integer(111), quickSort.getOutputBuffer().get());
 	}
 	
 	@Test
@@ -101,7 +101,7 @@ public class testMerge {
 		}
 		Sorter<Integer> sorter = new Sorter<Integer>();
 		Collections.shuffle(list);
-		List<Integer> sortedList = sorter.mergeSort(list);
+		List<Integer> sortedList = sorter.quickSort(list);
 		Collections.sort(list);
 		assertEquals(list, sortedList);
 	}

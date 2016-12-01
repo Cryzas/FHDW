@@ -5,7 +5,11 @@
 	<classpathentry kind="src" path="bubbleSort"/>
 	<classpathentry kind="src" path="mergeSort"/>
 	<classpathentry kind="src" path="Sorter"/>
+<<<<<<< HEAD
 	<classpathentry kind="src" path="automaton"/>
+=======
+	<classpathentry kind="src" path="quickSort"/>
+>>>>>>> origin/master
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
