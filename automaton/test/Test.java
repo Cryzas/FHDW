@@ -1,4 +1,7 @@
 package test;
+/*
+ * TEST
+ */
 
 import static org.junit.Assert.assertEquals;
 
