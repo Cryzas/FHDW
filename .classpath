@@ -7,6 +7,7 @@
 	<classpathentry kind="src" path="quickSort"/>
 	<classpathentry kind="src" path="transaction"/>
 	<classpathentry kind="src" path="bubbleSort"/>
+	<classpathentry kind="src" path="partsList"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>

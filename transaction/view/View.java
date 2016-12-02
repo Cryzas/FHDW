@@ -24,6 +24,7 @@ import javax.swing.event.ListSelectionListener;
 import model.AccountException;
 import model.UnderLimitException;
 import viewModel.ViewModel;
+import view.View;
 import viewModel.AccountTransactionFacadeView;
 import viewModel.AccountView;
 import viewModel.EntryView;

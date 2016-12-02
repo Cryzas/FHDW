@@ -20,7 +20,6 @@ public class Manager {
 
 	/** Fuegt zur Liste einen neuen Thread hinzu **/
 	synchronized public void addThread(Thread t) {
-		System.out.println("new Thread");
 		this.threads.add(t);
 	}
 
@@ -31,7 +30,6 @@ public class Manager {
 	 * das Lock des Managers wird geoeffnet
 	 **/
 	synchronized public void finishedWithFailure(Thread t) {
-		System.out.println("failure");
 		this.threads.remove(t);
 		if (threads.isEmpty()) {
 			setRunning(false);
@@ -45,7 +43,6 @@ public class Manager {
 	 * geoeffnet
 	 **/
 	synchronized public void finishedSuccessfull(Thread t, String output) {
-		System.out.println("success");
 		setRunning(false);
 		this.output = output;
 		waitingForFinish.unlock();
@@ -72,7 +69,6 @@ public class Manager {
 	 **/
 	public String getOutput() {
 		waitingForFinish.lock();
-		System.out.println("Fertig");
 		return this.output;
 	}
 }
