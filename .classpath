@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="transaction"/>
-	<classpathentry kind="src" path="massCalculating"/>
-	<classpathentry kind="src" path="bubbleSort"/>
-	<classpathentry kind="src" path="mergeSort"/>
-	<classpathentry kind="src" path="Sorter"/>
-<<<<<<< HEAD
 	<classpathentry kind="src" path="automaton"/>
-=======
+	<classpathentry kind="src" path="massCalculating"/>
+	<classpathentry kind="src" path="Sorter"/>
+	<classpathentry kind="src" path="mergeSort"/>
 	<classpathentry kind="src" path="quickSort"/>
->>>>>>> origin/master
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="transaction"/>
+	<classpathentry kind="src" path="bubbleSort"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
