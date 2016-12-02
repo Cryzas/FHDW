@@ -4,7 +4,7 @@ package model;
 public abstract class ComponentCommon implements Component {
 
 	protected final String name;
-	protected static int price;
+	protected int price;
 
 	protected ComponentCommon(final String name, int price) {
 		this.name = name;

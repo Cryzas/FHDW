@@ -3,9 +3,6 @@ import java.util.Vector;
 
 
 public class Material extends ComponentCommon {
-	
-	int price;
-	int name;
 
 	private static final String UnstructuredMaterialMessage = "Materialien haben kein Struktur!";
 	public static Material create(final String name, int price) {
